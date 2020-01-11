@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.boot.liqian.mapper.SaveMapper">
+
+
+    <insert id="saveUser"
+            parameterType="com.boot.liqian.model.User">
+		insert into user (userId,userName,password,userType,passwordToken)
+		values(#{userId},#{userName},#{password},#{userType},#{passwordToken})
+	</insert>
+
+    <insert id="addProductor"
+            parameterType="com.boot.liqian.model.Productor">
+		insert into productor (productorId,productorName,connector,conPhone)
+		values(#{productorId},#{productorName},#{connector},#{conPhone})
+	</insert>
+
+    <insert id="addMdince"
+            parameterType="com.boot.liqian.model.Medince">
+		insert into medince (medinceId,medinceName,medinceType,buyNumber,restNumber,productTime,functional,productorId,price,overTime,purchasePrice)
+		values(#{medinceId},#{medinceName},#{medinceType},#{buyNumber},#{restNumber},#{productTime},#{functional},#{productorId},#{price},#{overTime},#{purchasePrice})
+	</insert>
+
+    <insert id="addMdinceType"
+            parameterType="com.boot.liqian.model.MedinceType">
+		insert into medincetype (type,cotent)
+		values(#{type},#{cotent})
+	</insert>
+    <insert id="addBuyer"
+            parameterType="com.boot.liqian.model.Buyer">
+		insert into buyer (userId,membershipCard,membershipPassword,integral)
+		values(#{userId},#{membershipCard},#{membershipPassword},#{integral})
+	</insert>
+
+    <insert id="addPurchase"
+            parameterType="com.boot.liqian.model.Purchase">
+		insert into purchase (purchaseId,medinceId,medinceType,productorId,purchaseTime)
+		values(#{purchaseId},#{medinceId},#{medinceType},#{productorId},#{purchaseTime})
+	</insert>
+
+
+    <insert id="addMedinceRedemption"
+            parameterType="com.boot.liqian.model.MedinceRedemption">
+		insert into MedinceRedemption (number,medinceId)
+		values(#{number},#{medinceId})
+
+	</insert>
+
+    <insert id="addSail"
+            parameterType="com.boot.liqian.model.Sail">
+		insert into sail (buyId,userId,medinceId,medinceName,medinceType,number,count,buyTime)
+		values(#{buyId},#{userId},#{medinceId},#{medinceName},#{medinceType},#{number},#{count},#{buyTime})
+
+	</insert>
+
+    <insert id="addRetur"
+            parameterType="com.boot.liqian.model.Return">
+		insert into retur (returnId,medinceId,returnName,connector,returnTime)
+		values(#{returnId},#{medinceId},#{returnName},#{connector},#{returnTime})
+
+	</insert>
+	<insert id="addPrize"
+			parameterType="com.boot.liqian.model.Redemption">
+		insert into redemption (number,award)
+		values(#{number},#{award})
+
+	</insert>
+
+</mapper>

@@ -1,0 +1,2281 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>管理界面</title>
+    <!--下面用于引入bootStrap样式-->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" />
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!--引入boootBox-->
+    <!-- <script src="https://cdn.bootcss.com/bootbox.js/4.4.0/bootbox.js"></script> -->
+    <script src="js/config.js"></script>
+    <!--引用jquery ui 样式-->
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css" />
+    <!--引用下拉菜单 样式-->
+    <link rel="stylesheet" href="css/dropDown.css" />
+    <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <!-- 引入本地css -->
+    <link rel="stylesheet" href="css/sailor.css" />
+    <title>html之div层布局</title>
+</head>
+
+<body>
+    <!-- 奖品添加的模态框 -->
+    <div class="modal fade" id="prizemanage_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+                    <h4 class="modal-title" id="myModalLabel">添加奖品</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="#" id="form">
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">奖品名称</label
+          >
+          <div class="col-sm-10">
+            <input
+              type="text"
+              class="form-control"
+              id="prizemanage_add_name"
+              name="inputName"
+              data-m="success"
+              placeholder=""
+            />
+            <span class="help-block" id="helpSpanaddPone_sms"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputName" class="col-sm-2 control-label"
+            >所需积分</label
+          >
+          <div class="col-sm-10">
+            <input
+              type="number"
+              class="form-control"
+              id="prizemanage_add_jifen"
+              name="inputName"
+              data-m="success"
+              placeholder=""
+            />
+            <span class="help-block" id="helpSpanaddP_sms"></span>
+          </div>
+        </div>
+       
+        
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-default"
+        data-dismiss="modal"
+        id="Close"
+      >
+        关闭
+      </button>
+      <button type="button" class="btn btn-default" id="prizemanage_add_update">
+        添加
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+    <!-- 奖品编辑的模态框 -->
+    <div class="modal fade" id="prizemanage_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                    <h4 class="modal-title" id="myModalLabel">奖品管理</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="#" id="form">
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">奖品名称</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="prizemanage_edit_name"
+                  name="inputName"
+                  data-m="success"
+                  placeholder=""
+                />
+                <span class="help-block" id="helpSpanaddPone_sms"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputName" class="col-sm-2 control-label"
+                >所需积分</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="prizemanage_edit_jifen"
+                  name="inputName"
+                  data-m="success"
+                  placeholder=""
+                />
+                <span class="help-block" id="helpSpanaddP_sms"></span>
+              </div>
+            </div>
+           
+            
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-default"
+            data-dismiss="modal"
+            id="Close"
+          >
+            关闭
+          </button>
+          <button type="button" class="btn btn-default" id="prizemanage_edit_update">
+            修改
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- 通知的模态框 -->
+    <div class="modal fade" id="noticeModal_IM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                    <h4 class="modal-title" id="myModalLabel">缺货通知</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="#" id="form">
+                        <div class="form-group">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td>药品编号</td>
+                                        <td>药品名</td>
+                                        <td>库存剩余量</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="notice_tab"></tbody>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="restNumber_IM" name="inputName" data-m="success" placeholder="请尽快进货" readonly="readonly" />
+                                <span class="help-block" id="helpSpanaddP_sms"></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="Close">
+              关闭
+            </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 积分兑换的模态框 -->
+    <div class="modal fade" id="addModalAward_bI" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                    <h4 class="modal-title" id="myModalLabel">积分兑换</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="#" id="form">
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">用户名</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="awardN_bI"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="用户名"
+                    disabled='disabled'
+                  />
+                  <span class="help-block" id="helpSpanaddP_sms"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >手机号</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="awardMC_bI"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="手机号"
+                    disabled='disabled'
+                  />
+                  <span class="help-block" id="helpSpanaddP_sms"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >积分数量</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="awardNu_bI"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="积分数量"
+                    disabled='disabled'
+                  />
+                  <span class="help-block" id="helpSpanaddP_sms"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputDeptName" class="col-sm-2 control-label"
+                  >奖品</label
+                >
+                <div class="col-sm-4" id='award_change_prize'>
+                  <select
+                    class="form-control"
+                    id="awardPrize_bi"
+                    name="inputDeptName"
+                  >
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal"
+              id="Close"
+            >
+              关闭
+            </button>
+            <button type="button" class="btn btn-default" id="award_bI">
+              兑换
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 添加会员的模态框 -->
+    <div
+      class="modal fade"
+      id="addModal_bI"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">添加会员</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" action="#" id="form">
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >用户电话</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="addPP_bI"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="用户电话"
+                    data-container="body"
+                    data-toggle="popover" 
+                    data-placement="bottom" 
+                    data-content="该账户已经注册，请更换手机号"
+                  />
+                  <span class="help-block" id="helpSpanaddPone_sms"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >用户名</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="addN_bI"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="用户名"
+                    
+                  />
+                  <span class="help-block" id="helpSpanaddP_sms"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >身份证号码</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="addIC_bI"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="身份证号码"
+                  />
+                  <span class="help-block" id="helpSpanaddP_sms"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >会员卡密码</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="addP_bI"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="会员卡密码"
+                  />
+                  <span class="help-block" id="helpSpanMTNA"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >确认密码</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="con_bI"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="确认密码"
+                    data-container="body"
+                    data-toggle="popover" 
+                    data-placement="bottom" 
+                    data-content="两次密码不一致"
+                  />
+                  <span class="help-block" id="helpSpan_addBuyer"></span>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal"
+              id="Close"
+            >
+              关闭
+            </button>
+            <button type="button" class="btn btn-default" id="addMember_bI">
+              添加
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 修改会员卡密码的模态框 -->
+    <div
+      class="modal fade"
+      id="modifyPModal_bI"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">修改会员卡密码</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" action="#" id="form">
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >用户电话</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="modifyPP_bI"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="用户电话"
+                    data-container="body" 
+                    data-toggle="popover"
+                     data-placement="bottom" 
+                     data-content="该用户还未注册"
+                  />
+                  <span class="help-block" id="helpSpanP_sms"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >新密码</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="modifyPNP_bI"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="新密码"
+                  />
+                  <span class="help-block" id="helpSpanMTNA"></span>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal"
+              id="Close"
+            >
+              关闭
+            </button>
+            <button type="button" class="btn btn-default" id="modifyPCon_bI">
+              修改
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 编辑客户信息的模态框 -->
+    <div
+      class="modal fade"
+      id="empAddModal_bI"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">编辑客户信息</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" action="#" id="form">
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >用户名</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="MTNA_bI"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="用户名"
+                  />
+                  <span class="help-block" id="helpSpanMTNA"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >手机号</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="mC_bI"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="会员卡号"
+                   readonly='readonly'
+                  />
+                  <span class="help-block" id="helpSpanMTNA"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >本次消费金额</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="cout_bI"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="消费数额(单位：元)"
+                  />
+                  <span class="help-block" id="helpSpanMTNA_Money"></span>
+                </div>
+              </div>
+              <!-- <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >积分数额</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    
+                    name="inputName"
+                    data-m="success"
+                    placeholder="积分数额"
+                    readonly="readonly"
+                  />
+                  <span class="help-block" id="helpSpanMTNA"></span>
+                </div>
+              </div> -->
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal"
+              id="Close"
+            >
+              关闭
+            </button>
+            <button type="button" class="btn btn-default" id="AddM_bI">
+              修改
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 药物类别添加的模态框 -->
+    <div
+      class="modal fade"
+      id="empAddModal_MT"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">新增药物类别</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" action="#" id="form">
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >药品类别名</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="MTNA"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="药品类别名"
+                  />
+                  <span class="help-block" id="helpSpanMTNA"></span>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal"
+              id="Close"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-default" id="AddM_T">
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 药物添加的模态框 -->
+    <div
+      class="modal fade"
+      id="empAddModal_M"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">新增药物</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" action="#" id="form">
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >药品编码</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="mIa"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="药品编码"
+                  />
+                  <span class="help-block" id="helpSpanMIA"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >药品名</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="mna"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="药品名"
+                  />
+                  <span class="help-block" id="helpSpanToInputName"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputDeptName" class="col-sm-2 control-label"
+                  >药品类型</label
+                >
+                <div class="col-sm-4">
+                  <select class="form-control" id="mta" name="inputDeptName">
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label"
+                  >采购数量</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="bna"
+                    name="inputPhone"
+                    placeholder="采购数量"
+                    data-sig="0"
+                  />
+                  <span class="help-block" id="helpSpanToinputEmail"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label"
+                  >生产日期</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="mtimea"
+                    name="inputPhone"
+                    placeholder="YYYY-MM-DD"
+                    data-sig="0"
+                  />
+                  <span class="help-block" id="helpSpanToinputEmail"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label"
+                  >保质期时间</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="overTime_modal"
+                    name="inputPhone"
+                    placeholder="过期时间"
+                    data-sig="0"
+                  />
+                  <span class="help-block" id="helpSpanToinputEmail"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label"
+                  >功能描述</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="mfa"
+                    name="inputPhone"
+                    placeholder="功能描述"
+                    data-sig="0"
+                  />
+                  <span class="help-block" id="helpSpanToinputEmail"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputDeptName" class="col-sm-2 control-label"
+                  >供应商</label
+                >
+                <div class="col-sm-4">
+                  <select class="form-control" id="mPa" name="inputDeptName">
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label"
+                  >药品价格</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="mpa"
+                    name="inputPhone"
+                    placeholder="药品价格"
+                    data-sig="0"
+                  />
+                  <span class="help-block" id="helpSpanToinputEmail"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label"
+                  >药品进价</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="PurchasePrice_modal"
+                    name="inputPhone"
+                    placeholder="药品进价"
+                    data-sig="0"
+                  />
+                  <span class="help-block" id="helpSpanToinputEmail"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label"
+                  >药品积分</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="medinceReNu"
+                    name="inputPhone"
+                    placeholder="药品积分"
+                    data-sig="0"
+                  />
+                  <span class="help-block" id="helpSpanToinputEmail"></span>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal"
+              id="Close"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-default" id="Save_M">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 药品修改的模态框 -->
+    <div
+      class="modal fade"
+      id="empUpdateModal_M"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel_Update">修改药品信息</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" action="#" id="form_Update">
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label" id=""
+                  >药品名</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="m_n"
+                    name="name"
+                    placeholder=""
+                  />
+                  <span
+                    class="help-block"
+                    id="helpSpanToInputName_Update"
+                  ></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputDeptName" class="col-sm-2 control-label"
+                  >采购数量</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="mn"
+                    name="inputEmail"
+                    placeholder=""
+                  />
+                  <span
+                    class="help-block"
+                    id="helpSpanToinputEmail_Update"
+                  ></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label" id=""
+                  >库存剩余量</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="m_r"
+                    name="name"
+                    placeholder=""
+                  />
+                  <span
+                    class="help-block"
+                    id="helpSpanToInputName_Update"
+                  ></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputDeptName" class="col-sm-2 control-label"
+                  >功能描述</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="mf"
+                    name="inputEmail"
+                    placeholder=""
+                  />
+                  <span
+                    class="help-block"
+                    id="helpSpanToinputEmail_Update"
+                  ></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputDeptName" class="col-sm-2 control-label"
+                  >药品价格</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="mp"
+                    name="inputEmail"
+                    placeholder=""
+                  />
+                  <span
+                    class="help-block"
+                    id="helpSpanToinputEmail_Update"
+                  ></span>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal"
+              id="Close_Update"
+            >
+              关闭
+            </button>
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal"
+              id="Save_Update_M"
+            >
+              更新
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 供应商添加的模态框 -->
+    <div
+      class="modal fade"
+      id="empAddModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">新增供应商</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" action="#" id="form">
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >供应商名</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputName"
+                    name="inputName"
+                    data-m="success"
+                    placeholder="供应商名"
+                  />
+                  <span class="help-block" id="helpSpanToInputName"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label"
+                  >联系人</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputPhone"
+                    name="inputPhone"
+                    placeholder="联系人"
+                    data-sig="0"
+                  />
+                  <span class="help-block" id="helpSpanToinputPH"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label"
+                  >联系电话</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputIC"
+                    name="inputPhone"
+                    placeholder="联系电话"
+                    data-sig="0"
+                  />
+                  <span class="help-block" id="helpSpanToinputEmail"></span>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal"
+              id="Close"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-default" id="Save">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 供应商修改的模态框 -->
+    <div
+      class="modal fade"
+      id="empUpdateModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel_Update">修改供应商信息</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" action="#" id="form_Update">
+              <div class="form-group">
+                <label
+                  for="inputName"
+                  class="col-sm-2 control-label"
+                  id="emp_name_model"
+                  >供应商名</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputName_Update"
+                    name="name"
+                    placeholder=""
+                  />
+                  <span
+                    class="help-block"
+                    id="helpSpanToInputName_Update"
+                  ></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label"
+                  >联系人</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputEmail_Update"
+                    name="inputEmail"
+                    placeholder=""
+                  />
+                  <span class="help-block" id="helpSpanToinputP"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputDeptName" class="col-sm-2 control-label"
+                  >联系电话</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="empUpdateModalPass"
+                    name="inputEmail"
+                    placeholder=""
+                  />
+                  <span
+                    class="help-block"
+                    id="helpSpanToinputEmail_Update"
+                  ></span>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal"
+              id="Close_Update"
+            >
+              关闭
+            </button>
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal"
+              id="Save_Update"
+            >
+              更新
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="top">
+        <a class="regit" style="color:#5cb85c" href="login.html">注销</a>
+        <p class="title">多味客管理系统</p>
+      </div>
+      <div class="content">
+        <div class="left">
+          <!-- <div>
+            <button
+              type="button"
+              class="btn btn-primary full-width"
+              id="productManage"
+            >
+              供应商管理
+            </button>
+          </div> -->
+          <!-- <div>
+            <button
+              type="button"
+              class="btn btn-default full-width m-t-5"
+              id="medinceManage"
+            >
+              药品信息管理
+            </button>
+          </div> -->
+          <div>
+            <button
+              type="button"
+              class="btn btn-success full-width m-t-5"
+              id="clientMa"
+            >
+              客户信息管理
+            </button>
+          </div>
+          <div>
+            <button type="button" class="btn btn-info full-width m-t-5" id="IM">
+              奖品管理
+            </button>
+          </div>
+          <!-- <div>
+            <button
+              type="button"
+              class="btn btn-warning full-width m-t-5"
+              id="sailManage"
+            >
+              会员充值
+            </button>
+          </div> -->
+          <!-- <div>
+            <button
+              type="button"
+              class="btn btn-link full-width m-t-5"
+              id="PurchaseManage"
+            >
+              进货管理
+            </button>
+          </div> -->
+          <!-- <div>
+            <button
+              type="button"
+              class="btn btn-danger full-width "
+              id="ReturnManage"
+            >
+              退货管理
+            </button>
+          </div> -->
+        </div>
+        <div class="right container" id="right"></div>
+      </div>
+      <div class="footer">
+        <p>版权所有 &copy; 2020-01-09 @多味客</p>
+      </div>
+    </div>
+    <script>
+      var logininfo = window.location.href.split("=")[1];
+      // var logininfo = "16639413256";
+      if (logininfo == null || logininfo == undefined) {
+        alert("非法登录");
+        window.location.href = "login.html";
+      }
+      if (logininfo.indexOf("#") != -1) {
+        logininfo = logininfo.substring(0, logininfo.indexOf("#"));
+      }
+      var curProductorId;
+      var curProduct;
+      var cuPn;
+      $("#productManage").click(function() {
+        $("#right").empty();
+        $("#right").append(" <div id='nav'></div>");
+        $("#nav").append(
+          " <ol class='breadcrumb p-l-15 '> <li><a href='#' class='' disabled='disabled'>Home</a></li> <li><a href='#'>基本信息管理</a></li> <li class='active'>供应商信息管理</li></ol>"
+        );
+        $("#right").append(" <div id='search' class='p-l-25 '></div>");
+        $("#search").append(
+          "<form class='navbar-form navbar-left' action='#'><div class='form-group'><input type='text' id='searchInput' placeholder='输入查询内容' class='h-34'/></div> <div class='btn-group'> <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>查询 <span class= 'caret' ></span></button > <ul class='dropdown-menu'><li role='separator' class='divider'></li><li><a href='#' id='searchbyname'>按供应商查询</a></li><li role='separator' class='divider'></li><li><a href='#' id='searchbyphone'>按联系人查询</a></li></ul ></div> </form>  "
+        );
+        $("#search").append(
+          "<div class='float-r'> <div class='btn-group p-r-30'> <button type='button' class='btn btn-default dropdown-toggle btn-style' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>功能 <span class= 'caret' ></span></button > <ul class='dropdown-menu'><li role='separator' class='divider'></li><li><a href='#' id='empDeleBtn'>批量删除</a></li><li role='separator' class='divider'></li><li><a href='#' id='addProduct'>添加供应商</a></li></ul ></div><div>"
+        );
+        $("#right").append(" <div id='cotent' class='p-l-25 '></div>");
+        $("#cotent").append(
+          "<table class='table table-striped table-bordered table-hover'> <thead><tr> <th><input type='checkbox' id='check_ALl' /></th><th>供应商名</th><th>联系人</th><th>联系电话</th><th>操作</th></tr> <thead><tbody id='tbody_data'></tbody></table>"
+        );
+        //    < !--用于显示分页信息 -->
+        $("#right").append(
+          "<div class='row p-l-25'><div class='col-md-6' id='PageInfo'></div><div class='col-md-6' id='PageNav'></div></div>"
+        );
+        toPage(1);
+      });
+      //用于跳转页面
+      function toPage(pn) {
+        cuPn = pn;
+        $.ajax({
+          url: host + "/getAllProduct",
+          data: {
+            pn: pn
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            var emp = data.results.list;
+
+            //获取成功之后要做的第一件事情就是：解析并显示学生数据
+            showEmpMesage(emp);
+            //获取成功之后要做的第二件事情就是：解析并显示分页信息
+            showPageInfo(data);
+            //获取成功之后要做的第三件事情就是：解析并显示分页条
+            showPageNav(data);
+          }
+        });
+      }
+      //解析显示学生信息
+      function showEmpMesage(data) {
+        //每一次构建之前先把数据清空
+        $("#tbody_data").empty();
+        //此处的写法应该根据浏览器显示的数据进行编写
+
+        $.each(data, function(index, item) {
+          $("#tbody_data").append("<tr id='tr" + index + "'></tr>");
+          $("#tr" + index).append(
+            "<td><input type='checkbox' class='check_item' data-checkBoxName='" +
+              item.productorName +
+              "' data-checkBoxId='" +
+              item.productorId +
+              "'/></td>"
+          );
+          $("#tr" + index).append("<td>" + item.productorName + "</td>");
+          $("#tr" + index).append("<td>" + item.connector + "</td>");
+          $("#tr" + index).append("<td>" + item.conPhone + "</td>");
+          $("#tr" + index).append("<td id='bu" + index + "'></td>");
+          $("#bu" + index).append(
+            "<button class='btn btn-primary btn-sm edit' data-edit='" +
+              item.productorId +
+              "'><span class='glyphicon glyphicon-pencil ' aria-hidden='true'></span>编辑</button>"
+          );
+          $("#bu" + index).append("  ");
+
+          $("#bu" + index).append(
+            "<button class='btn btn-danger btn-sm delete' data-delete='" +
+              item.productorId +
+              "' data-name='" +
+              item.productorName +
+              "'><span class='glyphicon glyphicon-trash ' aria-hidden='true'></span>删除</button>"
+          );
+        });
+      }
+      //解析显示分页信息
+      function showPageInfo(data) {
+        //每一次构建之前先把数据清空
+        $("#PageInfo").empty();
+        $("#PageInfo").append(
+          "当前第" +
+            data.results.pageNum +
+            "页 ,总共" +
+            data.results.pages +
+            "页,共" +
+            data.results.total +
+            "条记录"
+        );
+        pageNumber = data.results.pageNum;
+      }
+      //解析显示分页条,并且能够可以点击下一页并跳转到对应的页面
+      function showPageNav(data) {
+        //每一次构建之前先把数据清空
+        $("#PageNav").empty();
+        $("#PageNav").append(
+          "<nav aria-label='Page navigation'><ul class='pagination'></ul></nav>"
+        );
+        if (data.results.pageNum > 1) {
+          var dataPN = 1;
+          $(".pagination").append(
+            "<li><a href='#' data-pn='" + dataPN + "' class='pn'>首页</a></li>"
+          );
+        }
+        //上一页的值
+        var prevoiuePage = data.results.pageNum - 1;
+        if (data.results.hasPreviousPage) {
+          $(".pagination").append(
+            "<li ><a href='#' aria-label='Previous' data-pn='" +
+              prevoiuePage +
+              "' class='pn'> <span aria-hidden='true' class='span-style'>&laquo;</span></a></li>"
+          );
+        }
+        $.each(data.results.navigatepageNums, function(index, item) {
+          if (item == data.results.pageNum) {
+            $(".pagination").append(
+              "<li class='active pn'><a href='#' class='pn' data-pn='" +
+                item +
+                "'>" +
+                item +
+                "</a></li>"
+            );
+          }
+          if (item != data.results.pageNum) {
+            $(".pagination").append(
+              "<li><a href='#' class='pn' data-pn='" +
+                item +
+                "'>" +
+                item +
+                "</a></li>"
+            );
+          }
+        });
+        //下一页的值
+        var nextPage = data.results.pageNum + 1;
+        if (data.results.hasNextPage) {
+          // datePn = enterpriseId + "-" + nextPage;
+          $(".pagination").append(
+            "<li ><a href='#' aria-label='Next' data-pn='" +
+              nextPage +
+              "' class='pn'> <span aria-hidden='true' class='span-style'>&raquo;</span></a></li>"
+          );
+          //末页的值
+          var lastPage = data.results.pages;
+          var total = data.results.total;
+          pageTotal = lastPage;
+          pages = lastPage;
+
+          $(".pagination").append(
+            "<li ><a href='#' class='pn' data-pn='" +
+              lastPage +
+              "'>末页</a></li>"
+          );
+        }
+      }
+      //用于给修改员工信息动态产生的按钮添加点击事件
+      $(document).on("click", ".edit", function() {
+        //1.查出学生信息加入对话框
+        var productorId = $(this).attr("data-edit");
+        curProductorId = productorId;
+        getCurrentInfo(curProductorId);
+
+        $("#empUpdateModal").modal({
+          backdrop: "static"
+        });
+      });
+
+      function getCurrentInfo(getUserOnlyInfo) {
+        $.ajax({
+          url: host + "/getProduct",
+          data: {
+            productorId: getUserOnlyInfo
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            curProduct = data.productor;
+            
+            $("#inputName_Update").val(data.productor.productorName);
+            $("#inputEmail_Update").val(data.productor.connector);
+            $("#empUpdateModalPass").val(data.productor.conPhone);
+          }
+        });
+      }
+      //用于实现更新按钮的功能
+      $("#Save_Update").click(function() {
+        var pN = $("#inputName_Update").val();
+        var cN = $("#inputEmail_Update").val();
+        var cP = $("#empUpdateModalPass").val();
+
+        updateProductor(curProduct.productorId, pN, cN, cP);
+      });
+      //更新供应商
+      function updateProductor(pI, pN, cN, cP) {
+        $.ajax({
+          url: host + "/updateProductor",
+          data: {
+            pI: pI,
+            pN: pN,
+            cN: cN,
+            cP: cP
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            alert("更新成功");
+            toPage(cuPn);
+          },
+          error: function() {
+            alert("更新失败，请刷新后重试");
+          }
+        });
+      }
+      //用于给动态产生的删除按钮添加点击事件
+      $(document).on("click", ".delete", function() {
+        var emp_id = $(this).attr("data-delete");
+        var emp_Name = $(this).attr("data-name");
+        var re = confirm("确认要删除【" + emp_Name + "】此供应商的信息");
+        if (!re) {
+          return false;
+        }
+        $.ajax({
+          url: host + "/deleteProductor",
+          data: {
+            pI: emp_id
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            alert("删除成功");
+            toPage(cuPn);
+          },
+          error: function() {
+            alert("删除失败，请刷新后重试");
+          }
+        });
+      });
+      //用于设置翻页的点击事件
+      $(document).on("click", ".pn", function() {
+        var pageNumber = $(this).attr("data-pn");
+        cuPn = pageNumber;
+        toPage(pageNumber);
+      });
+      //实现删除多个员工的按钮功能
+      $(document).on("click", "#empDeleBtn", function() {
+        var checkBox_Checked = $(".check_item:checked"); //此处用于获取选中的复选框
+        var emp_nameAsSelected = "";
+        var emp_idAsSelected = "";
+        var count = 0;
+        $.each(checkBox_Checked, function() {
+          emp_nameAsSelected += $(this).attr("data-checkBoxName") + ","; //用于获取每一个按钮的name值
+          emp_idAsSelected += $(this).attr("data-checkBoxId") + "-";
+          count += 1;
+        });
+        //去除emp_nameAsSelected中多余的逗号
+        var emp_nameAsSelectedSub = emp_nameAsSelected.substring(
+          0,
+          emp_nameAsSelected.length - 1
+        );
+        emp_idAsSelected = emp_idAsSelected.substring(
+          0,
+          emp_idAsSelected.length - 1
+        );
+
+        var con = confirm(
+          "确认删除【" + emp_nameAsSelectedSub + "】这" + count + "个员工吗"
+        );
+        if (con == false) {
+          return false;
+        }
+
+        $.ajax({
+          url: host + "/deleteProductors",
+          data: "pIs=" + emp_idAsSelected,
+          type: "post",
+          success: function(data) {
+            alert("删除成功");
+
+            //跳转到当前页面
+            toPage(1);
+          }
+        });
+      });
+      //新增员工
+      $(document).on("click", "#addProduct", function() {
+        //在模态框弹出之前，先发送ajax请求查出部门信息，添加的下拉框中
+        $("#inputName").val("");
+        $("#inputPhone").val("");
+        $("#inputIC").val("");
+
+        $("#helpSpanToinputPH").empty();
+        //此处弹出模态框
+        $("#empAddModal").modal({
+          backdrop: "static"
+        });
+      });
+
+      //用于给动态产生的删除按钮添加点击事件
+      $(document).on("click", "#Save", function() {
+        var pN = $("#inputName").val();
+        var cN = $("#inputPhone").val();
+        var cP = $("#inputIC").val();
+
+        $.ajax({
+          url: host + "/addProductor",
+          data: {
+            pN: pN,
+            cN: cN,
+            cP: cP
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            alert("添加成功");
+            toPage(cuPn);
+            $("#empAddModal").modal("hide");
+          },
+          error: function() {
+            alert("添加失败");
+          }
+        });
+      });
+
+      //按供应商查询
+      $(document).on("click", "#searchbyname", function() {
+        var name = $("#searchInput").val();
+        $.ajax({
+          url: host + "/searchProductorbypn",
+          data: {
+            pN: name
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            var datare = data.results.list;
+            showEmpMesage(datare);
+          },
+          error: function() {}
+        });
+      });
+      //按联系人查询
+      $(document).on("click", "#searchbyphone", function() {
+        var name = $("#searchInput").val();
+        $.ajax({
+          url: host + "/searchProductorbycN",
+          data: {
+            cN: name
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            var datare = data.results.list;
+            showEmpMesage(datare);
+          },
+          error: function() {}
+        });
+      });
+      //完成全选/全不选的功能
+      $(document).on("click", "#check_ALl", function() {
+        //使用attr获取checked的值是undifined,所以定义原声的属性使用pop获取值
+        //$(this).attr("checked");
+        $(".check_item").prop("checked", $(this).prop("checked"));
+      });
+
+      // 下面是药品信息管理
+      var cuPn_M;
+      var curMedinceId;
+      var cuMedince;
+      $("#medinceManage").click(function() {
+        $("#right").empty();
+        $("#right").append(" <div id='nav'></div>");
+        $("#nav").append(
+          " <ol class='breadcrumb p-l-15 '> <li><a href='#' class='' disabled='disabled'>Home</a></li> <li><a href='#'>基本信息管理</a></li> <li class='active'>药品信息管理</li></ol>"
+        );
+        $("#right").append(" <div id='search' class='p-l-25 '></div>");
+        $("#search").append(
+          "<form class='navbar-form navbar-left' action='#'><div class='form-group'><input type='text' id='searchInput' placeholder='输入查询内容' class='h-34'/></div> <div class='btn-group'> <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>查询 <span class= 'caret' ></span></button > <ul class='dropdown-menu'><li role='separator' class='divider'></li><li><a href='#' id='searchbyMename'>按药品名查询</a></li><li role='separator' class='divider'></li><li><a href='#' id='searchByMI'>按药品编码查询</a></li></ul ></div> </form>  "
+        );
+        $("#search").append(
+          "<div class='float-r'> <div class='btn-group p-r-30'> <button type='button' class='btn btn-default dropdown-toggle btn-style' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>功能 <span class= 'caret' ></span></button > <ul class='dropdown-menu'><li role='separator' class='divider'></li><li><a href='#' id='empDeleBtn_M'>批量删除</a></li><li role='separator' class='divider'></li><li><a href='#' id='addProduct_M'>添加药品</a></li><li role='separator' class='divider'></li><li><a href='#' id='addType_M'>添加类别</a></li></ul ></div><div>"
+        );
+        $("#right").append(" <div id='cotent' class='p-l-25 '></div>");
+        $("#cotent").append(
+          "<table class='table table-striped table-bordered table-hover'> <thead><tr> <th><input type='checkbox' id='check_ALl' /></th><th>药品名</th><th>药品类型</th><th>采购数量</th><th>库存剩余量</th><th>生产日期</th><th>药品功能描述</th><th>药品价格</th><th>操作</th></tr> <thead><tbody id='tbody_data'></tbody></table>"
+        );
+        //    < !--用于显示分页信息 -->
+        $("#right").append(
+          "<div class='row p-l-25'><div class='col-md-6' id='PageInfo'></div><div class='col-md-6' id='PageNav'></div></div>"
+        );
+        toPage_mediceManage(1);
+      });
+      //用于跳转页面
+      function toPage_mediceManage(pn) {
+        cuPn_M = pn;
+        $.ajax({
+          url: host + "/getAllMedinceInfo",
+          data: {
+            pn: pn
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            var emp = data.results.list;
+
+            //获取成功之后要做的第一件事情就是：解析并显示学生数据
+            showEmpMesage_M(emp);
+            //获取成功之后要做的第二件事情就是：解析并显示分页信息
+            showPageInfo_M(data);
+            //获取成功之后要做的第三件事情就是：解析并显示分页条
+            showPageNav_M(data);
+          }
+        });
+      }
+      //解析显示学生信息
+      function showEmpMesage_M(data) {
+        //每一次构建之前先把数据清空
+        $("#tbody_data").empty();
+        //此处的写法应该根据浏览器显示的数据进行编写
+
+        $.each(data, function(index, item) {
+          $("#tbody_data").append("<tr id='tr" + index + "'></tr>");
+          $("#tr" + index).append(
+            "<td><input type='checkbox' class='check_item' data-checkBoxName='" +
+              item.medinceName +
+              "' data-checkBoxId='" +
+              item.medinceId +
+              "'/></td>"
+          );
+          $("#tr" + index).append("<td>" + item.medinceName + "</td>");
+          $("#tr" + index).append("<td>" + item.medinceTypeCotent + "</td>");
+          $("#tr" + index).append("<td>" + item.buyNumber + "</td>");
+          $("#tr" + index).append("<td>" + item.restNumber + "</td>");
+          $("#tr" + index).append("<td>" + item.productTime + "</td>");
+          $("#tr" + index).append("<td>" + item.functional + "</td>");
+          $("#tr" + index).append("<td>" + item.price + "元</td>");
+          $("#tr" + index).append("<td id='bu" + index + "'></td>");
+          $("#bu" + index).append(
+            "<button class='btn btn-primary btn-sm edit_M' data-edit='" +
+              item.medinceId +
+              "'>编辑</button>"
+          );
+          $("#bu" + index).append("  ");
+
+          $("#bu" + index).append(
+            "<button class='btn btn-danger btn-sm delete_m' data-delete='" +
+              item.medinceId +
+              "' data-name='" +
+              item.medinceName +
+              "'>删除</button>"
+          );
+        });
+      }
+      //解析显示分页信息
+      function showPageInfo_M(data) {
+        //每一次构建之前先把数据清空
+        $("#PageInfo").empty();
+        $("#PageInfo").append(
+          "当前第" +
+            data.results.pageNum +
+            "页 ,总共" +
+            data.results.pages +
+            "页,共" +
+            data.results.total +
+            "条记录"
+        );
+        pageNumber = data.results.pageNum;
+      }
+      //解析显示分页条,并且能够可以点击下一页并跳转到对应的页面
+      function showPageNav_M(data) {
+        //每一次构建之前先把数据清空
+        $("#PageNav").empty();
+        $("#PageNav").append(
+          "<nav aria-label='Page navigation'><ul class='pagination'></ul></nav>"
+        );
+        if (data.results.pageNum > 1) {
+          var dataPN = 1;
+          $(".pagination").append(
+            "<li><a href='#' data-pn='" +
+              dataPN +
+              "' class='pn_M'>首页</a></li>"
+          );
+        }
+        //上一页的值
+        var prevoiuePage = data.results.pageNum - 1;
+        if (data.results.hasPreviousPage) {
+          $(".pagination").append(
+            "<li ><a href='#' aria-label='Previous' data-pn='" +
+              prevoiuePage +
+              "' class='pn_M'> <span aria-hidden='true' class='span-style'>&laquo;</span></a></li>"
+          );
+        }
+        $.each(data.results.navigatepageNums, function(index, item) {
+          if (item == data.results.pageNum) {
+            $(".pagination").append(
+              "<li class='active pn'><a href='#' class='pn_M' data-pn='" +
+                item +
+                "'>" +
+                item +
+                "</a></li>"
+            );
+          }
+          if (item != data.results.pageNum) {
+            $(".pagination").append(
+              "<li><a href='#' class='pn_M' data-pn='" +
+                item +
+                "'>" +
+                item +
+                "</a></li>"
+            );
+          }
+        });
+        //下一页的值
+        var nextPage = data.results.pageNum + 1;
+        if (data.results.hasNextPage) {
+          // datePn = enterpriseId + "-" + nextPage;
+          $(".pagination").append(
+            "<li ><a href='#' aria-label='Next' data-pn='" +
+              nextPage +
+              "' class='pn_M'> <span aria-hidden='true' class='span-style'>&raquo;</span></a></li>"
+          );
+          //末页的值
+          var lastPage = data.results.pages;
+          var total = data.results.total;
+          pageTotal = lastPage;
+          pages = lastPage;
+
+          $(".pagination").append(
+            "<li ><a href='#' class='pn_M' data-pn='" +
+              lastPage +
+              "'>末页</a></li>"
+          );
+        }
+      }
+      //用于设置翻页的点击事件
+      $(document).on("click", ".pn_M", function() {
+        var pageNumber = $(this).attr("data-pn");
+        cuPn_M = pageNumber;
+        toPage_mediceManage(pageNumber);
+      });
+      //用于给修改员工信息动态产生的按钮添加点击事件
+      $(document).on("click", ".edit_M", function() {
+        //1.查出学生信息加入对话框
+        var MedinceId = $(this).attr("data-edit");
+        curMedinceId = MedinceId;
+        getCurrentInfo_M(MedinceId);
+
+        $("#empUpdateModal_M").modal({
+          backdrop: "static"
+        });
+      });
+
+      function getCurrentInfo_M(getUserOnlyInfo) {
+        $.ajax({
+          url: host + "/getMedince",
+          data: {
+            mI: curMedinceId
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            cuMedince = data.medince;
+            $("#m_n").val(data.medince.medinceName);
+            $("#mn").val(data.medince.buyNumber);
+            $("#m_r").val(data.medince.restNumber);
+            $("#mf").val(data.medince.functional);
+            $("#mp").val(data.medince.price);
+          }
+        });
+      }
+
+      //用于实现更新按钮的功能
+      $("#Save_Update_M").click(function() {
+        var mN = $("#m_n").val();
+        var bN = $("#mn").val();
+        var rN = $("#m_r").val();
+        var funcional = $("#mf").val();
+        var price = $("#mp").val();
+        updateProductor_M(mN, bN, rN, funcional, price);
+      });
+
+      //更新药品信息
+      function updateProductor_M(mN, bN, rN, funcional, price) {
+        $.ajax({
+          url: host + "/updateMedince",
+          data: {
+            mI: cuMedince.medinceId,
+            mN: mN,
+            bN: bN,
+            rN: rN,
+            funcional: funcional,
+            price: price
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            alert("更新成功");
+            toPage_mediceManage(cuPn_M);
+          },
+          error: function() {
+            alert("更新失败，请刷新后重试");
+          }
+        });
+      }
+      //用于给动态产生的删除按钮添加点击事件
+      $(document).on("click", ".delete_m", function() {
+        var emp_id = $(this).attr("data-delete");
+        var emp_Name = $(this).attr("data-name");
+        var re = confirm("确认要删除【" + emp_Name + "】此供应商的信息");
+        if (!re) {
+          return false;
+        }
+        $.ajax({
+          url: host + "/deleteMedince",
+          data: {
+            mI: emp_id
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            alert("删除成功");
+            toPage_mediceManage(cuPn_M);
+          },
+          error: function() {
+            alert("删除失败，请刷新后重试");
+          }
+        });
+      });
+      //实现删除多个药品的按钮功能
+      $(document).on("click", "#empDeleBtn_M", function() {
+        var checkBox_Checked = $(".check_item:checked"); //此处用于获取选中的复选框
+        var emp_nameAsSelected = "";
+        var emp_idAsSelected = "";
+        var count = 0;
+        $.each(checkBox_Checked, function() {
+          emp_nameAsSelected += $(this).attr("data-checkBoxName") + ","; //用于获取每一个按钮的name值
+          emp_idAsSelected += $(this).attr("data-checkBoxId") + "-";
+          count += 1;
+        });
+        //去除emp_nameAsSelected中多余的逗号
+        var emp_nameAsSelectedSub = emp_nameAsSelected.substring(
+          0,
+          emp_nameAsSelected.length - 1
+        );
+        emp_idAsSelected = emp_idAsSelected.substring(
+          0,
+          emp_idAsSelected.length - 1
+        );
+
+        var con = confirm(
+          "确认删除【" + emp_nameAsSelectedSub + "】这" + count + "个员工吗"
+        );
+        if (con == false) {
+          return false;
+        }
+
+        $.ajax({
+          url: host + "/deleteMedinces",
+          data: "mIs=" + emp_idAsSelected,
+          type: "post",
+          success: function(data) {
+            alert("删除成功");
+
+            //跳转到当前页面
+            toPage_mediceManage(cuPn_M);
+          }
+        });
+      });
+      //新增员工
+      $(document).on("click", "#addProduct_M", function() {
+        //在模态框弹出之前，先发送ajax请求查出部门信息，添加的下拉框中
+        $("#mna").val("");
+        $.ajax({
+          url: host + "/getMedinceType",
+
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            $("#mta").empty();
+
+            $.each(data.medinceTypes, function(index, item) {
+              $("#mta").append(
+                "<option data-deptid=" +
+                  item.type +
+                  ">" +
+                  item.cotent +
+                  "</option>"
+              );
+            });
+          },
+          error: function() {
+            alert("获取数据失败失败，请刷新后重试");
+          }
+        });
+        $("#bna").val("");
+        $("#mta").datepicker();
+
+        $("#mfa").val("");
+        $.ajax({
+          url: host + "/getAllProductor",
+
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            $("#mPa").empty();
+            $.each(data.productors, function(index, item) {
+              $("#mPa").append(
+                "<option data-deptid=" +
+                  item.productorId +
+                  "class='option'>" +
+                  item.productorName +
+                  "</option>"
+              );
+            });
+          },
+          error: function() {
+            alert("列表获取失败，请刷新后重试");
+          }
+        });
+        $("#mpa").val("");
+
+        $("#helpSpanToinputPH").empty();
+        //此处弹出模态框
+        $("#empAddModal_M").modal({
+          backdrop: "static"
+        });
+      });
+      //用于给动态产生的删除按钮添加点击事件
+      $(document).on("click", "#Save_M", function() {
+        var mI = $("#mIa").val();
+        var mn = $("#mna").val();
+        var mt = $("#mta").val();
+        var time = $("#mtimea").val();
+
+        var bn = $("#bna").val();
+
+        var mf = $("#mfa").val();
+        var mP = $("#mPa").val();
+        var mp = $("#mpa").val();
+
+        var overTime = $("#overTime_modal").val();
+        var purchasePr = $("#PurchasePrice_modal").val();
+        var medinceNu = $("#medinceReNu").val();
+        $.ajax({
+          url: host + "/judgeMedince",
+          data: {
+            mI: mI
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            if (data.status == 0) {
+              $("#helpSpanMIA").empty();
+              $.ajax({
+                url: host + "/addMedince",
+                data: {
+                  mI: mI,
+                  time: time,
+                  mn: mn,
+                  bn: bn,
+                  mt: mt,
+                  mf: mf,
+                  mP: mP,
+                  mp: mp,
+                  overTime: overTime,
+                  purchasePr: purchasePr,
+                  medinceNu: medinceNu
+                },
+                dataType: "json",
+                type: "post",
+                //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+                xhrFields: {
+                  withCredentials: true
+                },
+                crossDomain: true,
+                success: function(data) {
+                  alert("添加成功");
+                  //跳转到当前页面
+                  toPage_mediceManage(cuPn_M);
+                  $("#empAddModal_M").modal("hide");
+                },
+                error: function() {
+                  alert("添加失败");
+                }
+              });
+            } else {
+              $("#helpSpanMIA").empty();
+              $("#helpSpanMIA").append(
+                "<div class='alert alert-warning alert-dismissible alert_Name' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Warning!</strong>此药品已经注册</div>"
+              );
+            }
+          },
+          error: function() {
+            alert("添加失败");
+          }
+        });
+      });
+      //药品类别添加
+      $(document).on("click", "#addType_M", function() {
+        //此处弹出模态框
+        $("#empAddModal_MT").modal({
+          backdrop: "static"
+        });
+      });
+      $(document).on("click", "#AddM_T", function() {
+        var mC = $("#MTNA").val();
+        $.ajax({
+          url: host + "/judgeMedincetype",
+          data: {
+            mC: mC
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            if (data.status == 0) {
+              $("#helpSpanMIA").empty();
+              $.ajax({
+                url: host + "/addMedincetype",
+                data: {
+                  mC: mC
+                },
+                dataType: "json",
+                type: "post",
+                //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+                xhrFields: {
+                  withCredentials: true
+                },
+                crossDomain: true,
+                success: function(data) {
+                  alert("添加成功");
+                  //跳转到当前页面
+                  toPage_mediceManage(cuPn_M);
+                  $("#empAddModal_MT").modal("hide");
+                },
+                error: function() {
+                  alert("添加失败");
+                }
+              });
+            } else {
+              $("#helpSpanMTNA").empty();
+              $("#helpSpanMTNA").append(
+                "<div class='alert alert-warning alert-dismissible alert_Name' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Warning!</strong>此药品类别已经存在</div>"
+              );
+            }
+          },
+          error: function() {
+            alert("添加失败");
+          }
+        });
+      });
+
+      //按药品名查询
+      $(document).on("click", "#searchbyMename", function() {
+        var serchCotent = $("#searchInput").val();
+        $.ajax({
+          url: host + "/searchMedinceByName",
+          data: {
+            serchCotent: serchCotent
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            var emp = data.results.list;
+
+            //获取成功之后要做的第一件事情就是：解析并显示学生数据
+            showEmpMesage_M(emp);
+            //获取成功之后要做的第二件事情就是：解析并显示分页信息
+            showPageInfo_M(data);
+            //获取成功之后要做的第三件事情就是：解析并显示分页条
+            showPageNav_M(data);
+          },
+          error: function() {
+            alert("查询失败");
+          }
+        });
+      });
+      //按药品编码查询
+      $(document).on("click", "#searchByMI", function() {
+        var serchCotent = $("#searchInput").val();
+        $.ajax({
+          url: host + "/searchMedinceByMI",
+          data: {
+            serchCotent: serchCotent
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            var emp = data.results.list;
+
+            //获取成功之后要做的第一件事情就是：解析并显示学生数据
+            showEmpMesage_M(emp);
+            //获取成功之后要做的第二件事情就是：解析并显示分页信息
+            showPageInfo_M(data);
+            //获取成功之后要做的第三件事情就是：解析并显示分页条
+            showPageNav_M(data);
+          },
+          error: function() {
+            alert("查询失败");
+          }
+        });
+      });
+    </script>
+    <!-- 下面是药店销售管理 -->
+    <script src="js/medinceSaileManage.js"></script>
+    <!-- 下面是库存管理 -->
+    <script src="js/InventoryManagement.js"></script>
+    <!-- 下面是销售管理 -->
+    <script src="js/saleManage.js"></script>
+    <!-- 下面是进货管理 -->
+    <script src="js/purchaseManage.js"></script>
+    <!-- 下面是进货管理 -->
+    <script src="js/returnManage.js"></script>
+  </body>
+</html>

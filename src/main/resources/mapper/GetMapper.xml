@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.boot.liqian.mapper.GetMapper">
+	<select id="getUserByUserId" parameterType="String"
+		resultType="com.boot.liqian.model.User">
+		select * from
+		user where userId=#{userId}
+	</select>
+    <select id="getAllKindsUsers" parameterType="Integer"
+            resultType="com.boot.liqian.model.User">
+		select * from
+		user where userType=#{userType}
+	</select>
+    <select id="getAllUserByName" parameterType="String"
+            resultType="com.boot.liqian.model.User">
+		select * from
+		user where   userName LIKE CONCAT('%',#{userName},'%') and userType=2
+	</select>
+    <select id="getAllProduct"
+            resultType="com.boot.liqian.model.Productor">
+		select * from
+		productor
+	</select>
+
+    <select id="getProductByPI" parameterType="String"
+            resultType="com.boot.liqian.model.Productor">
+		select * from
+		productor where productorId=#{productorId}
+	</select>
+
+    <select id="getProductorByPN" parameterType="String"
+            resultType="com.boot.liqian.model.Productor">
+		select * from
+		productor where  productorName LIKE CONCAT('%',#{productorName},'%')
+	</select>
+
+    <select id="getProductorBycN" parameterType="String"
+            resultType="com.boot.liqian.model.Productor">
+		select * from
+		productor where  connector LIKE CONCAT('%',#{connector},'%')
+	</select>
+
+    <select id="getAllMedince" parameterType="String"
+            resultType="com.boot.liqian.model.Medince">
+		select * from
+		medince
+	</select>
+
+    <select id="getMedinceByMI" parameterType="String"
+            resultType="com.boot.liqian.model.Medince">
+		select * from
+		medince where medinceId=#{medinceId}
+	</select>
+
+    <select id="getMedinceType"
+            resultType="com.boot.liqian.model.MedinceType">
+		select * from
+		medinceType
+	</select>
+
+    <select id="getMTByMN"  parameterType="String"
+            resultType="com.boot.liqian.model.MedinceType">
+		select * from
+		medinceType where cotent=#{cotent}
+	</select>
+    <select id="getMedinceByMN"  parameterType="String"
+            resultType="com.boot.liqian.model.Medince">
+		select * from
+		medince where medinceId=#{medinceId}
+	</select>
+
+    <select id="getProductByPN"  parameterType="String"
+            resultType="com.boot.liqian.model.Productor">
+		select * from
+		productor where productorName=#{productorName}
+	</select>
+
+
+    <select id="getMedinceWithName" parameterType="String"
+            resultType="com.boot.liqian.model.Medince">
+		select * from
+		medince where  medinceName LIKE CONCAT('%',#{medinceName},'%')
+	</select>
+
+    <select id="getMedinceWithMI" parameterType="String"
+            resultType="com.boot.liqian.model.Medince">
+		select * from
+		medince where  medinceId LIKE CONCAT('%',#{medinceId},'%')
+	</select>
+
+    <select id="getAllBuyers"
+            resultType="com.boot.liqian.model.Buyer">
+		select * from
+		buyer
+	</select>
+
+    <select id="getBuyerById" parameterType="String"
+            resultType="com.boot.liqian.model.Buyer">
+		select * from
+		buyer where userId=#{userId}
+	</select>
+    <select id="getBuyersById" parameterType="String"
+            resultType="com.boot.liqian.model.Buyer">
+		select * from
+		buyer where userId LIKE CONCAT('%',#{userId},'%')
+	</select>
+
+    <select id="getAllAwardList"
+            resultType="com.boot.liqian.model.Redemption">
+		select * from
+		redemption
+	</select>
+
+    <select id="getAwardByName" parameterType="String"
+            resultType="com.boot.liqian.model.Redemption">
+		select * from
+		redemption where award =#{award}
+	</select>
+
+    <select id="getMedinceTypeByType" parameterType="String"
+            resultType="com.boot.liqian.model.MedinceType">
+		select * from
+		medincetype where type =#{type}
+	</select>
+
+    <select id="getLittleMedince"
+            resultType="com.boot.liqian.model.Medince">
+        SELECT * FROM medince WHERE restNumber &lt;  10
+	</select>
+
+    <select id="getSailInfo"
+            resultType="com.boot.liqian.model.Sail">
+        SELECT * FROM sail
+	</select>
+
+    <select id="getSsailByName" parameterType="String"
+            resultType="com.boot.liqian.model.Sail">
+		select * from
+		sail where medinceName LIKE CONCAT('%',#{medinceName},'%')
+	</select>
+
+    <select id="getSsailByID" parameterType="String"
+            resultType="com.boot.liqian.model.Sail">
+		select * from
+		sail where medinceId LIKE CONCAT('%',#{medinceId},'%')
+	</select>
+
+    <select id="getAllPurchase"
+            resultType="com.boot.liqian.model.Purchase">
+		select * from
+		purchase
+	</select>
+
+    <select id="getPurchaseByID" parameterType="String"
+            resultType="com.boot.liqian.model.Purchase">
+		select * from
+		purchase where medinceId LIKE CONCAT('%',#{medinceId},'%')
+	</select>
+
+    <select id="getALlReturnInfo"
+            resultType="com.boot.liqian.model.Return">
+		select * from
+		retur
+	</select>
+
+    <select id="getReturnInfoByID" parameterType="String"
+            resultType="com.boot.liqian.model.Return">
+		select * from
+		retur where medinceId LIKE CONCAT('%',#{medinceId},'%')
+	</select>
+
+    <select id="getMRByID" parameterType="String"
+            resultType="com.boot.liqian.model.MedinceRedemption">
+		select * from
+		MedinceRedemption where medinceId =#{medinceId}
+	</select>
+
+    <select id="getSailByID" parameterType="String"
+            resultType="com.boot.liqian.model.Sail">
+		select * from
+		sail where userId =#{userId}
+	</select>
+
+    <select id="getSailByBuyID" parameterType="String"
+            resultType="com.boot.liqian.model.Sail">
+		select * from
+		sail where buyId =#{buyId}
+	</select>
+
+	<select id="getRedemption"
+			resultType="com.boot.liqian.model.Redemption">
+		select * from
+		redemption
+	</select>
+	<select id="getRedemptionById" parameterType="Integer"
+			resultType="com.boot.liqian.model.Redemption">
+		select * from
+		redemption where id=#{id}
+	</select>
+
+
+
+	<select id="getPrizesByName" parameterType="String"
+			resultType="com.boot.liqian.model.Redemption">
+		select * from
+		redemption where  award LIKE CONCAT('%',#{award},'%')
+	</select>
+</mapper>
