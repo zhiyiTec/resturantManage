@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.boot.liqian.mapper.UpdateMapper">
+
+	<update id="updateUserPassByUserId"
+		parameterType="com.boot.liqian.model.User">
+		UPDATE user set password=#{password}
+		where  userId=#{userId}
+	</update>
+    <update id="updateUserInfoByUserId"
+            parameterType="com.boot.liqian.model.User">
+		UPDATE user set userId=#{userId}, userName=#{userName},password=#{password},passwordToken=#{passwordToken}
+		where  id=#{id}
+	</update>
+    <update id="updateProductorInfoByPI"
+            parameterType="com.boot.liqian.model.Productor">
+		UPDATE productor set productorName=#{productorName}, connector=#{connector},conPhone=#{conPhone}
+		where  productorId=#{productorId}
+	</update>
+
+    <update id="updateMedinceByMI"
+            parameterType="com.boot.liqian.model.Medince">
+		UPDATE medince set medinceName=#{medinceName}, buyNumber=#{buyNumber},restNumber=#{restNumber},
+		functional=#{functional},price=#{price}
+		where  medinceId=#{medinceId}
+	</update>
+    <update id="updateBuyerByBI"
+            parameterType="com.boot.liqian.model.Buyer">
+		UPDATE buyer
+		<trim prefix="set" suffixOverrides=",">
+			<if test="integral!=null">integral=#{integral},</if>
+			<if test="cumoney!=null">cumoney=#{cumoney},</if>
+			<if test="sunmoney!=null">sunmoney=#{sunmoney},</if>
+		</trim>
+
+		where  userId=#{userId}
+	</update>
+
+    <update id="updateUserNameByBI"
+            parameterType="com.boot.liqian.model.User">
+		UPDATE user set userName=#{userName}
+		where  userId=#{userId}
+	</update>
+
+    <update id="updateBuyerMPByID"
+            parameterType="com.boot.liqian.model.Buyer">
+		UPDATE buyer set membershipPassword=#{membershipPassword}
+		where  userId=#{userId}
+	</update>
+
+    <update id="updateBuyerNuByID"
+            parameterType="com.boot.liqian.model.Buyer">
+		UPDATE buyer set integral=#{integral}
+		where  userId=#{userId}
+	</update>
+    <update id="updatemedincerestNumberByMI"
+            parameterType="com.boot.liqian.model.Medince">
+		UPDATE medince set restNumber=#{restNumber}
+		where  medinceId=#{medinceId}
+	</update>
+
+
+
+	<update id="updatePrizeInfo"  parameterType="com.boot.liqian.model.Redemption">
+		UPDATE redemption
+		<trim prefix="set" suffixOverrides=",">
+			<if test="award!=null">award=#{award},</if>
+			<if test="number!=null">number=#{number},</if>
+		</trim>
+		WHERE id=#{id}
+	</update>
+
+	<update id="updateRecharge"  parameterType="com.boot.liqian.model.Recharge">
+		UPDATE recharge
+		<trim prefix="set" suffixOverrides=",">
+			<if test="restmoney!=null">restmoney=#{restmoney},</if>
+
+		</trim>
+		WHERE userid=#{userid}
+	</update>
+
+	<update id="updateUserByUserId"
+			parameterType="com.boot.liqian.model.User">
+		UPDATE user
+		<trim prefix="set" suffixOverrides=",">
+			<if test="userName!=null">userName=#{userName},</if>
+			<if test="password!=null">password=#{password},</if>
+			<if test="token!=null">token=#{token},</if>
+			<if test="passwordToken!=null">passwordToken=#{passwordToken},</if>
+		</trim>
+
+		where  userId=#{userId}
+	</update>
+</mapper>

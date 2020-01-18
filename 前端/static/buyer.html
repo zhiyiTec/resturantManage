@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>购买界面</title>
+    <!--下面用于引入bootStrap样式-->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" />
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!--引入boootBox-->
+    <script src="https://cdn.bootcss.com/bootbox.js/4.4.0/bootbox.js"></script>
+    <script src="js/config.js"></script>
+
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+</head>
+
+<body class="white-bg">
+    <!--订单管理的模态框 -->
+    <div class="modal fade" id="noticeModal_IM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                    <h4 class="modal-title" id="myModalLabel">订单管理</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="#" id="form">
+                        <div class="form-group">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td>药品名</td>
+                                        <td>购买数量</td>
+                                        <td>总价格</td>
+                                        <td>购买时间</td>
+                                        <td>操作</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="notice_tab"></tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="Close">
+              关闭
+            </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 购买的模态框 -->
+    <div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                    <h4 class="modal-title" id="myModalLabel">购买</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="#" id="form">
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">药品名</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="mN_modal"
+                    name="inputName"
+                    data-m="success"
+                    placeholder=""
+                    readonly="readonly"
+                  />
+                  <span class="help-block" id="helpSpanaddP_sms"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >药品价格</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="mP_mdal"
+                    name="inputName"
+                    data-m="success"
+                    placeholder=""
+                    readonly="readonly"
+                  />
+                  <span class="help-block" id="helpSpanaddP_sms"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label"
+                  >购买数量</label
+                >
+                <div class="col-sm-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="buyNu_modal"
+                    name="inputName"
+                    data-m="success"
+                    placeholder=""
+                  />
+                  <span class="help-block" id="helpSpanaddP_sms"></span>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal"
+              id="Close"
+            >
+              关闭
+            </button>
+            <button type="button" class="btn btn-default" id="buy_btn">
+              购买
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <nav class="navbar navbar-default navbar-static-top navbar-fixed-top">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button
+              type="button"
+              class="navbar-toggle collapsed"
+              data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span> <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"
+              ><span id="deptName_a"></span
+              ><span style="font-family: STXingkai" id="">@Tec</span></a
+            >
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div
+            class="collapse navbar-collapse"
+            id="bs-example-navbar-collapse-1"
+          >
+            <form class="navbar-form navbar-left" action="#">
+              <div class="form-group">
+                <input type="text" id="searchInput" placeholder="输入药品名" />
+              </div>
+              <!-- Single button -->
+              <div class="btn-group">
+                <button
+                  type="button"
+                  class="btn btn-default "
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  id="btn_search"
+                >
+                  查询
+                </button>
+              </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a
+                  href="#"
+                  class="dropdown-toggle"
+                  data-toggle="dropdown"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span
+                    class="glyphicon glyphicon-cog"
+                    aria-hidden="true"
+                  ></span>
+                  功能 <span class="caret"></span
+                ></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a id="orderM">
+                      <span
+                        class="glyphicon glyphicon-plus-sign"
+                        aria-hidden="true"
+                      ></span>
+                      订单管理
+                    </a>
+                  </li>
+                  <li role="separator" class="divider"></li>
+                  <li>
+                    <a id="reS">
+                      <span
+                        class="glyphicon glyphicon-minus-sign"
+                        aria-hidden="true"
+                      ></span>
+                      积分查询
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </li>
+
+              <li>
+                <a href="login.html" id="exit">
+                  <span
+                    class="glyphicon glyphicon-off"
+                    aria-hidden="true"
+                  ></span>
+                  注销
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+      </nav>
+      <!-- 用于存放表格数据 -->
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th><input type="checkbox" id="check_ALl" /></th>
+                <th>药品名</th>
+                <th>药品类型</th>
+                <th>药品价格</th>
+                <th>购买</th>
+              </tr>
+            </thead>
+            <tbody id="tbody_data"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 用于显示分页信息 -->
+      <div class="row">
+        <!-- 分页文字信息 -->
+        <div class="col-md-6" id="PageInfo"></div>
+        <!-- 分页导航条-->
+        <div class="col-md-6" id="PageNav"></div>
+      </div>
+      <form
+        action="/zhiyi/excleimport"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <input
+          type="file"
+          id="file1"
+          name="fileContent"
+          style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;"
+        />
+      </form>
+    </div>
+    <script type="text/javascript">
+      var userInfo;
+      var logininfo = window.location.href.split("=")[1];
+      // var logininfo = "16639413262";
+      if (logininfo == null || logininfo == undefined) {
+        alert("非法登录");
+        window.location.href = "login.html";
+      }
+      if (logininfo.indexOf("#") != -1) {
+        logininfo = logininfo.substring(0, logininfo.indexOf("#"));
+      }
+
+      var pageTotal;
+      var pages;
+      //用于存储当前页码
+      var pageNumber;
+
+      var datePn;
+      var empId; //当前编辑的用户的电话
+      var currUser; //前编辑的用户
+      var judgeSignal; //判断标识
+      var curMID; //当前药品的ID
+      //1.页面加载完成之后直接发送一个ajax请求，来获取分页数据：
+      $(function() {
+        $.ajax({
+          url: host + "/getUser",
+          data: {
+            userId: logininfo
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            userInfo = data.user;
+            $("#deptName_a").text("");
+            $("#deptName_a").text(userInfo.userName);
+            toPage(1);
+          },
+          error: function() {
+            alert("获取企业信息失败");
+          }
+        });
+      });
+      //用于跳转页面
+      function toPage(pn) {
+        $("#searchInput").val("");
+        // $("#myButton_Search").text('点击查询');
+        $.ajax({
+          url: host + "/getAllMedinces_BU",
+          data: {
+            pn: pn
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            var emp = data.results.list;
+            //获取成功之后要做的第一件事情就是：解析并显示学生数据
+            showEmpMesage(emp);
+            //获取成功之后要做的第二件事情就是：解析并显示分页信息
+            showPageInfo(data);
+            //获取成功之后要做的第三件事情就是：解析并显示分页条
+            showPageNav(data);
+          }
+        });
+      }
+      //解析显示学生信息
+      function showEmpMesage(data) {
+        //每一次构建之前先把数据清空
+        $("#tbody_data").empty();
+        //此处的写法应该根据浏览器显示的数据进行编写
+
+        $.each(data, function(index, item) {
+          $("#tbody_data").append("<tr id='tr" + index + "'></tr>");
+          $("#tr" + index).append(
+            "<td><input type='checkbox' class='check_item' data-checkBoxName='" +
+              item.medinceId +
+              "' data-checkBoxId='" +
+              item.medinceId +
+              "'/></td>"
+          );
+          $("#tr" + index).append("<td>" + item.medinceName + "</td>");
+          $("#tr" + index).append("<td>" + item.medinceTypeCotent + "</td>");
+          $("#tr" + index).append("<td>" + item.price + "</td>");
+          $("#tr" + index).append("<td id='bu" + index + "'></td>");
+
+          $("#bu" + index).append(
+            "<button class='btn btn-success btn-sm buy' data-delete='" +
+              item.medinceId +
+              "' data-restNu='" +
+              item.restNumber +
+              "'><span class='glyphicon glyphicon-shopping-cart ' aria-hidden='true'></span>购买</button>"
+          );
+        });
+      }
+
+      //解析显示分页信息
+      function showPageInfo(data) {
+        //每一次构建之前先把数据清空
+        $("#PageInfo").empty();
+        $("#PageInfo").append(
+          "当前第" +
+            data.results.pageNum +
+            "页 ,总共" +
+            data.results.pages +
+            "页,共" +
+            data.results.total +
+            "条记录"
+        );
+        pageNumber = data.results.pageNum;
+      }
+      //解析显示分页条,并且能够可以点击下一页并跳转到对应的页面
+      function showPageNav(data) {
+        //每一次构建之前先把数据清空
+        $("#PageNav").empty();
+        $("#PageNav").append(
+          "<nav aria-label='Page navigation'><ul class='pagination'></ul></nav>"
+        );
+        if (data.results.pageNum > 1) {
+          var dataPN = 1;
+          $(".pagination").append(
+            "<li><a href='#' data-pn='" +
+              dataPN +
+              "' class='pn_msm'>首页</a></li>"
+          );
+        }
+        //上一页的值
+        var prevoiuePage = data.results.pageNum - 1;
+        if (data.results.hasPreviousPage) {
+          $(".pagination").append(
+            "<li ><a href='#' aria-label='Previous' data-pn='" +
+              prevoiuePage +
+              "' class='pn_msm'> <span aria-hidden='true' class='span-style'>&laquo;</span></a></li>"
+          );
+        }
+        $.each(data.results.navigatepageNums, function(index, item) {
+          if (item == data.results.pageNum) {
+            $(".pagination").append(
+              "<li class='active pn_msm'><a href='#' class='pn_msm' data-pn='" +
+                item +
+                "'>" +
+                item +
+                "</a></li>"
+            );
+          }
+          if (item != data.results.pageNum) {
+            $(".pagination").append(
+              "<li><a href='#' class='pn_msm' data-pn='" +
+                item +
+                "'>" +
+                item +
+                "</a></li>"
+            );
+          }
+        });
+        //下一页的值
+        var nextPage = data.results.pageNum + 1;
+        if (data.results.hasNextPage) {
+          // datePn = enterpriseId + "-" + nextPage;
+          $(".pagination").append(
+            "<li ><a href='#' aria-label='Next' data-pn='" +
+              nextPage +
+              "' class='pn_msm'> <span aria-hidden='true' class='span-style'>&raquo;</span></a></li>"
+          );
+          //末页的值
+          var lastPage = data.results.pages;
+          var total = data.results.total;
+          pageTotal = lastPage;
+          pages = lastPage;
+
+          $(".pagination").append(
+            "<li ><a href='#' class='pn_msm' data-pn='" +
+              lastPage +
+              "'>末页</a></li>"
+          );
+        }
+      }
+      //用于设置翻页的点击事件
+      $(document).on("click", ".pn_msm", function() {
+        var pageNumber = $(this).attr("data-pn");
+        cuPn_msm = pageNumber;
+        toPage(pageNumber);
+      });
+      //用于购买的点击事件
+      $(document).on("click", ".buy", function() {
+        curMID = $(this).attr("data-delete");
+        $.ajax({
+          url: host + "/getMedinceINfo_buy",
+          data: {
+            mi: curMID
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            $("#mN_modal").val(data.medince.medinceName);
+            $("#mP_mdal").val(data.medince.price + "元");
+            $("#buyModal").modal({
+              backdrop: "static"
+            });
+          },
+          error: function() {
+            alert("查询失败，请刷新后重试");
+          }
+        });
+      });
+      $(document).on("click", "#buy_btn", function() {
+        var buyNu = $("#buyNu_modal").val();
+        var restNu = $(".buy").attr("data-restNu");
+        console.log(restNu);
+        console.log(buyNu);
+        if (parseInt(buyNu) > parseInt(restNu)) {
+          alert("库存数量不足");
+        } else {
+          $.ajax({
+            url: host + "/addSail_buy",
+            data: {
+              mi: curMID,
+              buyerId: logininfo,
+              buyNu: buyNu
+            },
+            dataType: "json",
+            type: "post",
+            //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+            xhrFields: {
+              withCredentials: true
+            },
+            crossDomain: true,
+            success: function(data) {
+              alert("购买成功");
+              $("#buyModal").modal("hide");
+            },
+            error: function() {
+              alert("查询失败，请刷新后重试");
+            }
+          });
+        }
+      });
+      $(document).on("click", "#btn_search", function() {
+        var name = $("#searchInput").val();
+        $.ajax({
+          url: host + "/searchMedinceName_buy",
+          data: {
+            name: name,
+            pn: 1
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            var emp = data.results.list;
+            //获取成功之后要做的第一件事情就是：解析并显示学生数据
+            showEmpMesage(emp);
+          },
+          error: function() {
+            alert("查询失败，请刷新后重试");
+          }
+        });
+      });
+      //订单管理
+      $(document).on("click", "#orderM", function() {
+        $("#notice_tab").empty();
+        $.ajax({
+          url: host + "/searchorder_buy",
+          data: {
+            buyerId: logininfo
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            $.each(data.sails, function(index, item) {
+              $("#notice_tab").empty();
+              $("#notice_tab").append("<tr id='tr" + index + "'></tr>");
+
+              $("#tr" + index).append("<td>" + item.medinceName + "</td>");
+              $("#tr" + index).append("<td>" + item.number + "</td>");
+              $("#tr" + index).append("<td>" + item.count + " 元</td>");
+              $("#tr" + index).append("<td>" + item.buyTime + "</td>");
+              $("#tr" + index).append("<td id='bu" + index + "'></td>");
+              $("#bu" + index).append(
+                "<button class='btn btn-primary  ' type='button' data-bI='" +
+                  item.buyId +
+                  "' data-userID='" +
+                  item.userId +
+                  " '   data-mI='" +
+                  item.medinceId +
+                  "' id='returnOrder_buyer' >退单</button>"
+              );
+            });
+
+            $("#noticeModal_IM").modal({
+              backdrop: "static"
+            });
+          },
+          error: function() {
+            alert("查询失败，请刷新后重试");
+          }
+        });
+      });
+      //退单管理
+
+      $(document).on("click", "#returnOrder_buyer", function() {
+        var buyID = $(this).attr("data-bI");
+        var userID = $(this).attr("data-userID");
+        var medinceId = $(this).attr("data-mI");
+        $.ajax({
+          url: host + "/returnorder_buy",
+          data: {
+            buyID: buyID,
+            userID: userID,
+            medinceId: medinceId
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            alert("退单成功");
+
+            $("#noticeModal_IM").modal("hide");
+          },
+          error: function() {
+            alert("查询失败，请刷新后重试");
+          }
+        });
+      });
+      //积分查询
+      $(document).on("click", "#reS", function() {
+        $.ajax({
+          url: host + "/getjfen",
+          data: {
+            userID: logininfo
+          },
+          dataType: "json",
+          type: "post",
+          //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          success: function(data) {
+            alert("当前您的积分为【" + data.buyer.integral + "】");
+          },
+          error: function() {
+            alert("查询失败，请刷新后重试");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>党建后台管理系统</title>
+    <!--下面用于引入bootStrap样式-->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!--引入boootBox-->
+    <script src="https://cdn.bootcss.com/bootbox.js/4.4.0/bootbox.js"></script>
+    <script src="js/config.js"></script>
+    <!--引用jquery ui 样式-->
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+    <!--引用下拉菜单 样式-->
+    <link rel="stylesheet" href="css/dropDown.css">
+    <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+
+</head>
+
+<body class='white-bg'>
+    <!-- 添加部门的模态框-->
+    <div class="modal fade" id="addDeptModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="">添加部门</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label" id="">部门名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="addDeptModeldeptName" name="name" placeholder="请输入部门名">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="Close_Update">关闭</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="adddeptName">添加</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- 查看部门的模态框-->
+    <div class="modal fade" id="lookDeptModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                    <h4 class="modal-title" id="">查看部门</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>部门名</th>
+                                <th></th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lookDeptModel_tbody">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="close">关闭</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- 团队赛设置的模态框-->
+    <div class="modal fade" id="setPlayTeamModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="setPlayTeamModel_update">团队赛设置</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="#" id="setPlayTeamModel_form">
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label" id="">团队赛开始时间</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="setPlayTeamModel_beginTime" name="name" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label" id="">团队赛结束时间</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="setPlayTeamModel_EndTime" name="name" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDeptName" class="col-sm-2 control-label">部门1</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="setPlayTeamModeldept1" name="inputDeptName">
+    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDeptName" class="col-sm-2 control-label">部门2</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="setPlayTeamModeldept2" name="inputDeptName">
+                        
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="Close_Update">关闭</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="setPlayTeamModel_set">设置</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!  -- 查询学生成绩的模态框 -->
+    <div class="modal fade" id="empScoreModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                    <h4 class="modal-title" id="myModalLabel_Score">学生信息</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <p class="form-control-static" id="inputName_Score"></p>
+                        </div>
+                    </div>
+
+                    <table class="table">
+                        <thead id="thead_Score">
+                            <tr>
+                                <th>科目</th>
+                                <th>成绩</th>
+                                <th>开课时间</th>
+                                <th>状态</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_Score">
+
+                        </tbody>
+                        <tfoot id="tfoot_score"></tfoot>
+                    </table>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="Close">Close</button>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- 查询学生的模态框 -->
+    <div class="modal fade" id="empSearchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                    <h4 class="modal-title" id="myModalLabel_Search">学生信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="#" id="form_Search">
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">emp_Name</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static" id="inputName_Search"></p>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group " id="radioUpdate">
+                            <label for="inputGender" class="col-sm-2 control-label">gender</label>
+                            <div class="col-sm-10">
+                                <label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="genderMan_Search"
+                                    value="男" checked="checked" disabled> 男
+                            </label> <label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="genderGirl_Search"
+                                    value="女" disabled> 女
+                            </label> <label class="radio-inline"> <input type="radio" name="inlineRadioOptions" id="genderOthers_Search"
+                                    value="其他" disabled> 其他
+                            </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static" id="inputEmail_Search"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDeptName" class="col-sm-2 control-label">DeptName</label>
+                            <div class="col-sm-4">
+                                <p class="form-control-static" id="inputEmail_DeptName"></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="deal_Search">点击进行操作（修改或者删除）</button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- 员工修改的模态框 -->
+    <div class="modal fade" id="empUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                    <h4 class="modal-title" id="myModalLabel_Update">修改员工信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="#" id="form_Update">
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label" id="emp_name_model">姓名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputName_Update" name="name" placeholder="">
+                                <span class="help-block" id="helpSpanToInputName_Update"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-sm-2 control-label">电话</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="inputEmail_Update" name="inputEmail" placeholder=""> <span class="help-block" id="helpSpanToinputEmail_Update"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDeptName" class="col-sm-2 control-label">部门名</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="inputDeptName_Update" name="inputDeptName">
+
+                            </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="Close_Update">关闭</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="Save_Update">更新</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- 学生添加的模态框 -->
+    <div class="modal fade" id="empAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                    <h4 class="modal-title" id="myModalLabel">新增员工</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="#" id="form">
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">员工姓名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputName" name="inputName" data-m="success" placeholder="姓名"> <span class="help-block" id="helpSpanToInputName"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-sm-2 control-label">电话</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="inputPhone" name="inputPhone" placeholder="电话" data-sig='0'>
+                                <span class="help-block" id="helpSpanToinputEmail"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDeptName" class="col-sm-2 control-label">部门名</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="inputDeptName" name="inputDeptName">
+
+                            </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="Close">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="Save">Save</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container">
+
+
+        <nav class="navbar navbar-default navbar-static-top navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                    <a class="navbar-brand" href="#"><span id='deptName_a'></span><span style="font-family: STXingkai" id="">@Tec</span></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <form class="navbar-form navbar-left" action="#">
+                        <div class="form-group">
+                            <input type="text" id="searchInput" placeholder="输入查询内容" />
+                        </div>
+                        <!-- Single button -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                查询 <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" id='seachbydeptName'>按部门查询</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#" id='searchbyname'>按姓名查询</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#" id='searchbyphone'>按电话查询</a></li>
+
+                            </ul>
+                        </div>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 功能 <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a id="empAddBtn" onclick="addEmp()"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> 新增
+                                    </a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a id="empDeleBtn"> <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span> 批量删除
+                                    </a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a id="excelImport"> <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> excel导入
+                                    </a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-submenu">
+                                    <a id=""> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 团队赛 </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a id="setPlayTime"> 团队赛设置 </a>
+                                        </li>
+                                        <li role="separator" class="divider"></li>
+                                        <li>
+                                            <a id="lookteamGame"> 查看团队赛 </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-submenu">
+                                    <a id=""> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 部门设置 </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a id="lookdept">查看部门</a>
+                                        </li>
+                                        <li role="separator" class="divider"></li>
+                                        <li>
+                                            <a id="adddept">添加部门 </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+
+                        <li>
+                            <a href="../login-admin.html" id="exit"> <span class="glyphicon glyphicon-off" aria-hidden="true"></span> 注销
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <!-- 用于存放表格数据 -->
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="check_ALl" /></th>
+                            <th>员工姓名</th>
+                            <th>员工部门</th>
+                            <th>员工电话</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_data">
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+        <!-- 用于显示分页信息 -->
+        <div class="row">
+            <!-- 分页文字信息 -->
+            <div class="col-md-6" id="PageInfo"></div>
+            <!-- 分页导航条-->
+            <div class="col-md-6" id="PageNav"></div>
+        </div>
+        <form action="/zhiyi/excleimport" method="POST" enctype="multipart/form-data">
+            <input type="file" id="file1" name="fileContent" style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;">
+
+        </form>
+    </div>
+    <script type="text/javascript">
+        var logininfo = window.location.href.split("=")[1];
+        if (logininfo == null || logininfo == undefined) {
+            alert("非法登录");
+            window.location.href = '../login-admin.html';
+        }
+        var adminId = logininfo.split("-")[0];
+        var userName = logininfo.split("-")[0];
+        var userId = logininfo.split("-")[1];
+        var enterpriseId = logininfo.split("-")[2];
+        if (enterpriseId.indexOf("#") != -1) {
+            enterpriseId = enterpriseId.substring(0, enterpriseId.indexOf("#"));
+        }
+        var excelData;
+        var pageTotal;
+        var pages;
+        //用于存储当前页码
+        var pageNumber;
+        var empId; //员工电话
+        var userid; //用户id
+        var AddToSerachModelData;
+        var datePn;
+        var tegid; //团体赛id
+        //1.页面加载完成之后直接发送一个ajax请求，来获取分页数据：
+        $(function() {
+            //默认跳转到首页
+            $.ajax({
+                url: host + "/hongsong/getSessionId_Manage",
+                data: "getSessionId_ManageInfo=" + adminId,
+                type: "get",
+                //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function(data) {
+                    if (!data.status) {
+                        alert("非法登录");
+                        window.location.href = '../login-admin.html';
+
+                    } else {
+                        $.ajax({
+                            url: host + "/hongsong/getEN",
+                            data: "getENInfo=" + enterpriseId,
+                            type: "get",
+                            success: function(data) {
+                                console.log(data);
+                                $("#deptName_a").text("");
+                                $("#deptName_a").text(data.enterprise.enterpriseName);
+                                var enterpriseIdAPn = enterpriseId + "-" + "1";
+                                toPage(enterpriseIdAPn);
+                            },
+                            error: function() {
+                                alert("获取企业信息失败")
+                            }
+                        });
+                    }
+
+                }
+            })
+
+
+        });
+        //用于跳转页面
+        function toPage(enterpriseIdAPn) {
+            $("#searchInput").val("");
+            // $("#myButton_Search").text('点击查询');
+            $.ajax({
+                url: host + "/hongsong/getUserAll",
+                data: "enterpriseIdAPn=" + enterpriseIdAPn,
+                type: "get",
+                success: function(data) {
+
+                    var emp = data.results.list;
+                    //获取成功之后要做的第一件事情就是：解析并显示学生数据
+                    showEmpMesage(emp);
+                    //获取成功之后要做的第二件事情就是：解析并显示分页信息
+                    showPageInfo(data);
+                    //获取成功之后要做的第三件事情就是：解析并显示分页条
+                    showPageNav(data);
+
+
+                }
+            });
+        }
+        //解析显示学生信息
+        function showEmpMesage(data) {
+            //每一次构建之前先把数据清空
+            $("#tbody_data").empty();
+            //此处的写法应该根据浏览器显示的数据进行编写
+
+            $
+                .each(
+                    data,
+                    function(index, item) {
+                        $("#tbody_data").append("<tr id='tr" + index + "'></tr>");
+                        $("#tr" + index)
+                            .append(
+                                "<td><input type='checkbox' class='check_item' data-checkBoxName='" + item.userName + "' data-checkBoxId='" + item.phoneNumber + "'/></td>");
+                        $("#tr" + index).append(
+                            "<td>" + item.userName + "</td>");
+                        $("#tr" + index).append(
+                            "<td>" + item.deptname + "</td>");
+                        $("#tr" + index).append(
+                            "<td>" + item.phoneNumber + "</td>");
+                        $("#tr" + index).append(
+                            "<td id='bu" + index + "'></td>");
+                        $("#bu" + index)
+                            .append(
+                                "<button class='btn btn-primary btn-sm edit' data-edit='" + item.phoneNumber + "'><span class='glyphicon glyphicon-pencil ' aria-hidden='true'></span>编辑</button>");
+                        $("#bu" + index).append("  ");
+
+                        $("#bu" + index)
+                            .append(
+                                "<button class='btn btn-danger btn-sm delete' data-delete='" + item.phoneNumber + "' data-name='" + item.userName + "'><span class='glyphicon glyphicon-trash ' aria-hidden='true'></span>删除</button>");
+
+                    });
+        }
+
+        //解析显示分页信息
+        function showPageInfo(data) {
+
+            //每一次构建之前先把数据清空
+            $("#PageInfo").empty();
+            $("#PageInfo").append(
+                "当前第" + data.results.pageNum + "页 ,总共" +
+                data.results.pages + "页,共" +
+                data.results.total + "条记录");
+            pageNumber = data.results.pageNum
+
+        }
+        //解析显示分页条,并且能够可以点击下一页并跳转到对应的页面
+        function showPageNav(data) {
+
+            //每一次构建之前先把数据清空
+            $("#PageNav").empty();
+            $("#PageNav").append("<nav aria-label='Page navigation'><ul class='pagination'></ul></nav>");
+            if (data.results.pageNum > 1) {
+                var dataPN = 1;
+                $(".pagination").append("<li><a href='#' data-pn='" + dataPN + "' class='pn'>首页</a></li>");
+            }
+            //上一页的值
+            var prevoiuePage = data.results.pageNum - 1;
+            if (data.results.hasPreviousPage) {
+
+                $(".pagination").append("<li ><a href='#' aria-label='Previous' data-pn='" + prevoiuePage + "' class='pn'> <span aria-hidden='true'>&laquo;</span></a></li>");
+            }
+            $.each(data.results.navigatepageNums,
+                function(index, item) {
+                    if (item == data.results.pageNum) {
+                        $(".pagination").append("<li class='active '><a href='#' class='pn' data-pn='" + item + "'>" + item + "</a></li>");
+                    }
+                    if (item != data.results.pageNum) {
+                        $(".pagination").append("<li><a href='#' class='pn' data-pn='" + item + "'>" + item + "</a></li>");
+                    }
+
+                });
+            //下一页的值
+            var nextPage = data.results.pageNum + 1;
+            if (data.results.hasNextPage) {
+                datePn = enterpriseId + "-" + nextPage;
+                $(".pagination").append("<li ><a href='#' aria-label='Next' data-pn='" + nextPage + "' class='pn'> <span aria-hidden='true'>&raquo;</span></a></li>");
+                //末页的值
+                var lastPage = data.results.pages;
+                var total = data.results.total;
+                pageTotal = lastPage;
+                pages = lastPage;
+
+                $(".pagination").append("<li ><a href='#' class='pn' data-pn='" + lastPage + "'>末页</a></li>");
+            }
+
+        }
+        //用于弹出新增学生的模态框的点击事件
+        function addEmp() {
+            //在模态框弹出之前，先发送ajax请求查出部门信息，添加的下拉框中
+            $("#inputName").val("");
+            $("#inputPhone").val("");
+            $("#inputDeptName").empty();
+            $("#helpSpanToinputEmail").empty();
+
+            //用于填充部门
+            $.ajax({
+                url: host + "/hongsong/getDeptByE",
+                data: "getDeptByEInfo=" + enterpriseId,
+                type: "GET",
+                success: function(data) {
+
+                    //接下来就是添加部门信息到下拉列表 
+                    $.each(data.results,
+                        function(index, item) {
+                            $("#inputDeptName").append(
+                                "<option data-deptid='" + item.deptid + "'>" + item.deptname +
+                                "</option>");
+                        });
+
+                }
+            });
+            //此处弹出模态框
+            $('#empAddModal').modal({
+                backdrop: "static"
+            })
+        }
+        //用于送ajax请求查出部门信息，添加的下拉框中
+        function addDeptInfoToList(getDeptByEInfo) {
+            $.ajax({
+                url: host + "/hongsong/getDeptByE",
+                data: "getDeptByEInfo=" + getDeptByEInfo,
+                type: "GET",
+                success: function(data) {
+
+                    //接下来就是添加部门信息到下拉列表 
+                    $.each(data.results,
+                        function(index, item) {
+                            $("#inputDeptName_Update").append(
+                                "<option data-deptid='" + item.deptid + "'>" + item.deptname +
+                                "</option>");
+                        });
+
+                }
+            });
+        }
+        //用于设置翻页的点击事件
+        $(document).on("click", ".pn", function() {
+                var pageNumber = $(this).attr("data-pn");
+                var toP = enterpriseId + "-" + pageNumber;
+
+                toPage(toP);
+            })
+            //用于设置上一页，下一页的点击事件
+        $(document).on("click", ".pn", function() {
+            var pageNumber = $(this).attr("data-pn");
+            var toP = enterpriseId + "-" + pageNumber;
+
+            toPage(toP);
+        })
+
+        //用于给修改员工信息动态产生的按钮添加点击事件
+        $(document).on("click", ".edit", function() {
+            //1.查出学生信息加入对话框
+            var phoneNumber = $(this).attr("data-edit");
+            empId = phoneNumber;
+            var getUserOnlyInfo = enterpriseId + "-" + empId;
+            $("#inputDeptName_Update").empty();
+            addDeptInfoToList(enterpriseId);
+            getCurrentInfo(getUserOnlyInfo);
+
+            $('#empUpdateModal').modal({
+                backdrop: "static"
+            })
+        })
+
+        function getCurrentInfo(getUserOnlyInfo) {
+
+            $.ajax({
+                url: host + "/hongsong/getUserOnly",
+                type: "GET",
+                data: "getUserOnlyInfo=" + getUserOnlyInfo,
+                success: function(data) {
+                    userid = data.results.id;
+                    $("#inputName_Update").val(data.results.userName);
+                    $("#inputEmail_Update").val(data.results.phoneNumber);
+                    $("#inputDeptName_Update").val(
+                        [data.results.deptname]);
+                }
+            });
+        }
+
+        //用于实现更新按钮的功能
+        $("#Save_Update").click(
+            function() {
+                var emp_name = $("#inputName_Update").val();
+                var dept_name = $("#inputDeptName_Update").val();
+
+                var phone = $("#inputEmail_Update").val();
+                if (empId == phone) {
+                    var re = confirm("确认修改【" + emp_name + "】此员工的信息的信息");
+                    var updateUserByidInfo = userid + "-" + emp_name + "-" + dept_name + "-" + phone + "-" + enterpriseId;
+                    if (!re) {
+                        return false;
+                    }
+
+                    $.ajax({
+                        url: host + "/hongsong/updateUserByid",
+                        type: "get",
+                        data: "updateUserByidInfo=" + updateUserByidInfo,
+                        success: function(data) {
+
+                            alert("更新成功");
+                            //关闭模态框
+                            $('#empUpdateModal').modal("hide");
+                            //跳转到当前页面
+                            var toP = enterpriseId + "-" + pageNumber;
+                            toPage(toP);
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        url: host + "/hongsong/judgeEmpExit",
+                        data: "judgeEmpExitInfo=" + phone,
+                        type: "get",
+                        success: function(data) {
+                            if (data.exit) {
+                                // $("#helpSpanToinputEmail").append("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Warning!</strong>该号码已被注册</div>");
+                                alert("该号码已经被注册");
+                                return false;
+                            } else {
+                                var re = confirm("确认修改【" + emp_name + "】此员工的信息的信息");
+                                var updateUserByidInfo = userid + "-" + emp_name + "-" + dept_name + "-" + phone + "-" + enterpriseId;
+                                if (!re) {
+                                    return false;
+                                }
+
+                                $.ajax({
+                                    url: host + "/hongsong/updateUserByid",
+                                    type: "get",
+                                    data: "updateUserByidInfo=" + updateUserByidInfo,
+                                    success: function(data) {
+
+                                        alert("更新成功");
+                                        //关闭模态框
+                                        $('#empUpdateModal').modal("hide");
+                                        //跳转到当前页面
+                                        var toP = enterpriseId + "-" + pageNumber;
+                                        toPage(toP);
+                                    }
+                                });
+                            }
+
+
+                        },
+                        error: function() {
+                            alert("查询号码失败")
+                        }
+                    });
+                }
+
+
+            });
+        //实现新增员工的功能
+        //用于给动态产生的删除按钮添加点击事件
+        $(document).on("click", "#Save", function() {
+                var name = $("#inputName").val();
+                var phone = $("#inputPhone").val();
+                var deptName = $("#inputDeptName").val();
+
+                $.ajax({
+                    url: host + "/hongsong/judgeEmpExit",
+                    data: "judgeEmpExitInfo=" + phone,
+                    type: "get",
+                    success: function(data) {
+                        if (data.exit) {
+                            // $("#helpSpanToinputEmail").append("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Warning!</strong>该号码已被注册</div>");
+                            alert("该号码已经被注册");
+                            return false;
+                        } else {
+                            var addUserToUserInfo = name + "-" + enterpriseId + "-" + phone + "-" + deptName;
+                            $.ajax({
+                                url: host + "/hongsong/addUserToUser",
+                                type: "get",
+                                data: "addUserToUserInfo=" + addUserToUserInfo,
+                                success: function(data) {
+                                    alert("用户【" + name + "】添加成功");
+
+                                    //跳转到当前页面
+                                    showEmpMesage(data.result);
+                                },
+                                error: function() {
+                                    alert("新增员工失败")
+                                }
+                            });
+                        }
+                    },
+                    error: function() {
+                        alert("查询号码失败")
+                    }
+                });
+            })
+            //用于给动态产生的删除按钮添加点击事件
+        $(document).on("click", ".delete", function() {
+            var emp_id = $(this).attr("data-delete");
+            var emp_Name = $(this).attr("data-name")
+            var re = confirm("确认要删除【" + emp_Name + "】这条用户的信息");
+            if (!re) {
+                return false;
+            }
+            $.ajax({
+                url: host + "/hongsong/deleteUserByp",
+                type: "get",
+                data: "deleteUserBypInfo=" + emp_id,
+                success: function(data) {
+
+                    alert("删除成功");
+
+                    //跳转到当前页面
+                    var toP = enterpriseId + "-" + pageNumber;
+                    toPage(toP);
+                }
+            });
+        });
+
+        //完成全选/全不选的功能
+        $("#check_ALl").click(function() {
+            //使用attr获取checked的值是undifined,所以定义原声的属性使用pop获取值
+            //$(this).attr("checked");
+            $(".check_item").prop("checked", $(this).prop("checked"));
+        });
+        $(document).on("click", ".check_item", function() {
+            //先判断当前选中的元素是否是5个
+            var checkBoxNu_Checked = $(".check_item:checked").length; //此处用于获取选中的复选框的个数
+            var checkBoxNu_Item = $(".check_item").length; //此处用于获取当前页面的复选框的个数
+
+            if (checkBoxNu_Checked >= checkBoxNu_Item) {
+                $("#check_ALl").prop("checked", true);
+            } else {
+                $("#check_ALl").prop("checked", false);
+            }
+        });
+        //实现删除多个员工的按钮功能
+        $("#empDeleBtn").click(
+            function() {
+                var checkBox_Checked = $(".check_item:checked"); //此处用于获取选中的复选框
+                var emp_nameAsSelected = "";
+                var emp_idAsSelected = "";
+                var count = 0;
+                $.each(checkBox_Checked, function() {
+                    emp_nameAsSelected += $(this).attr("data-checkBoxName") +
+                        ","; //用于获取每一个按钮的name值
+                    emp_idAsSelected += $(this).attr("data-checkBoxId") +
+                        "-";
+                    count += 1;
+                });
+                //去除emp_nameAsSelected中多余的逗号
+                var emp_nameAsSelectedSub = emp_nameAsSelected.substring(0,
+                    emp_nameAsSelected.length - 1);
+                emp_idAsSelected = emp_idAsSelected.substring(0, emp_idAsSelected.length - 1);
+
+                var con = confirm("确认删除【" + emp_nameAsSelectedSub + "】这" +
+                    count + "个员工吗");
+                if (con == false) {
+                    return false;
+                }
+                $.ajax({
+                    url: host + "/hongsong/deleteUserBypMany",
+                    data: "deleteUserBypInfoMany=" + emp_idAsSelected,
+                    type: "get",
+                    success: function(data) {
+                        alert("删除成功");
+
+                        //跳转到当前页面
+                        var toP = enterpriseId + "-" + pageNumber;
+                        toPage(toP);
+                    }
+                });
+            });
+
+        //用于实现查询用户的功能
+        $('#myButton_Search').on('click', function() {
+
+            var $btn = $(this).text('loading');
+            var emp_Name = $("#searchInput").val();
+            $.ajax({
+                url: "${App_Path}/searchEmpByName",
+                type: "POST",
+                data: "emp_Name=" + emp_Name,
+                success: function(data) {
+
+                    if (data.extend.map.message == "No") {
+                        alert("未查询到该用户");
+                    } else {
+                        addToSearchModel(data);
+                        //此处弹出模态框
+                        $('#empSearchModal').modal({
+                            backdrop: "static"
+                        })
+
+                    }
+
+                }
+            });
+
+        });
+        //用于向查询用户的模态框中添加值
+        function addToSearchModel(data) {
+            $("#inputName_Search").text(data.extend.Emp.emp_name);
+            $("#empSearchModal input[name=inlineRadioOptions]").val(
+                [data.extend.Emp.gender]);
+            $("#inputEmail_Search").text(data.extend.Emp.eamil);
+            $("#inputEmail_DeptName").text(data.extend.Emp.dept_name);
+            AddToSerachModelData = data;
+        }
+        //用于给查询模态框中的操作按钮添加点击事件
+        $("#deal_Search").click(function() {
+                showSearchEmpInfo(AddToSerachModelData, 1);
+                $("#searchInput").val("");
+                //  $("#myButton_Search").text('点击查询');
+            })
+            //用于显示查询到的用户信息
+        function showSearchEmpInfo(data, index) {
+            $("#tbody_data").empty();
+            $("#tbody_data").append("<tr id='tr" + index + "'></tr>");
+            $("#tr" + index)
+                .append(
+                    "<td><input type='checkbox' class='check_item' data-checkBoxName='" + data.extend.Emp.emp_name + "' data-checkBoxId='" + data.extend.Emp.emp_id + "'/></td>");
+            $("#tr" + index).append("<td>" + data.extend.Emp.emp_id + "</td>");
+            $("#tr" + index)
+                .append("<td>" + data.extend.Emp.emp_name + "</td>");
+            $("#tr" + index).append("<td>" + data.extend.Emp.gender + "</td>");
+            $("#tr" + index).append("<td>" + data.extend.Emp.eamil + "</td>");
+            $("#tr" + index).append("<td>" + data.extend.dept_id + "</td>");
+            $("#tr" + index).append(
+                "<td>" + data.extend.Emp.dept_name + "</td>");
+            $("#tr" + index).append("<td id='bu" + index + "'></td>");
+            $("#bu" + index)
+                .append(
+                    "<button class='btn btn-primary btn-sm edit' data-edit='" + data.extend.Emp.emp_id + "' data-edit_Emp_Name='" + data.extend.Emp.emp_name + "'><span class='glyphicon glyphicon-pencil ' aria-hidden='true'></span>编辑</button>");
+            $("#bu" + index).append("  ");
+
+            $("#bu" + index)
+                .append(
+                    "<button class='btn btn-danger btn-sm delete' data-delete='" + data.extend.Emp.emp_id + "' data-delete_Emp_Name='" + data.extend.Emp.emp_name + "'><span class='glyphicon glyphicon-trash ' aria-hidden='true'></span>删除</button>");
+            $("#bu" + index)
+                .append(
+                    "<button class='btn btn-info btn-sm score' data-score='" + data.extend.Emp.emp_id + "' data-score_Emp_Name='" + data.extend.Emp.emp_name + "'><span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span>查成绩</button>");
+
+        }
+        //用于给注销按钮添加单击事件
+        $("#exit").click(function() {
+            window.location.href = 'login.jsp';
+        })
+
+        //此处用于数组判空
+        function isEmptyObject(e) {
+            var t;
+            for (t in e) {
+                return !1;
+            }
+            return !0;
+        }
+
+        function getArryLength(arr) {
+            var t;
+            var count = 0;
+            for (t in arr) {
+                count += 1;
+            }
+            return count;
+        }
+        //实现excel导出的点击功能
+        $("#excelOutput").click(function() {
+            bootbox.prompt("输入excel表名!", function(result) {
+
+                $.ajax({
+                    url: "${App_Path}/excel/" + result,
+                    data: JSON.stringify(excelData),
+                    type: "post",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8", //此处不能省略
+                    success: function(data) {
+                        bootbox.alert({
+                            message: "表" + result + ".xls已经成功保存到【D:/" + result + ".xls】",
+                            className: 'bb-alternate-modal'
+                        });
+                    },
+                    error: function() {
+                        bootbox.alert({
+                            message: "表" + result + ".xls已经成功保存到【D:/" + result + ".xls】",
+                            className: 'bb-alternate-modal'
+                        });
+                    }
+                });
+            });
+
+        })
+
+        //按员工电话查询
+        $(document).on("click", "#searchbyphone", function() {
+                var phone = $("#searchInput").val();
+                var getUserbyPhoneInfo = phone + "-" + enterpriseId;
+                $.ajax({
+                    url: host + "/hongsong/getUserbyPhone",
+                    data: "getUserbyPhoneInfo=" + getUserbyPhoneInfo,
+                    type: "get",
+                    success: function(data) {
+
+                        var datare = data.result;
+                        showEmpMesage(datare);
+                    },
+                    error: function() {
+
+                    }
+                });
+            })
+            //按员工姓名查询
+        $(document).on("click", "#searchbyname", function() {
+                var name = $("#searchInput").val();
+                var getUserbyNameInfo = name + "-" + enterpriseId;
+                $.ajax({
+                    url: host + "/hongsong/getUserbyName",
+                    data: "getUserbyNameInfo=" + getUserbyNameInfo,
+                    type: "get",
+                    success: function(data) {
+
+                        var datare = data.result;
+                        showEmpMesage(datare);
+                    },
+                    error: function() {
+
+                    }
+                });
+            })
+            //按部门查询
+        $(document).on("click", "#seachbydeptName", function() {
+                var deptName = $("#searchInput").val();
+                var getUserbydeptNameInfo = deptName + "-" + enterpriseId;
+                $.ajax({
+                    url: host + "/hongsong/getUserbydeptName",
+                    data: "getUserbydeptNameInfo=" + getUserbydeptNameInfo,
+                    type: "get",
+                    success: function(data) {
+
+                        var datare = data.result;
+                        showEmpMesage(datare);
+                    },
+                    error: function() {
+                        alert("按部门查询失败")
+                    }
+                });
+            })
+            //实现excel的批量导入
+        $("#excelImport").click(function() {
+                var r = confirm("导入的excel表要按照我们指定的表头和内容，否则会导入失败，是否点击下载excel模板，如果不需要点击取消进行文件选择");
+                var re;
+                if (r) {
+                    window.open('https://pan.baidu.com/s/1xq0oEsDLrW99DpO_zM9X1w', 'newwindow', 'height=400,width=800,top=20%,left=10%,toolbar=no,menubar=no,scrollbars=no,resizable = no, location = no, status = no')
+
+                } else {
+                    $("#file1").trigger("click");
+                    $("#file1").change(function() {
+                        var formData = new FormData();
+                        formData.append("excelFile", $("#file1")[0].files[0]);
+                        if ($("#file1")[0].files[0].name.endsWith(".xls") || $("#file1")[0].files[0].name.endsWith(".xlsx")) {
+                            $.ajax({
+                                url: host + "/hongsong/excleimport",
+                                data: formData,
+                                type: "post",
+                                processData: false,
+                                contentType: false,
+                                success: function(data) {
+                                    $.each(data.infomation, function(index, item) {
+                                        alert(item)
+                                    });
+                                    alert("导入成功")
+                                    $("#file1").val("")
+                                },
+                                error: function() {
+                                    alert("excel导入失败")
+                                }
+                            });
+                        } else {
+                            alert("文件类型有误");
+                            return false;
+                        }
+
+                    })
+                }
+            })
+            //用于团队赛设置
+        $("#setPlayTime").click(function() {
+                $("#setPlayTeamModel_beginTime").val("");
+                $("#setPlayTeamModel_EndTime").val("");
+                $("#setPlayTeamModel_beginTime").datepicker();
+                $("#setPlayTeamModel_EndTime").datepicker();
+                $("#setPlayTeamModeldept1").empty();
+                addToDeptList("setPlayTeamModeldept1");
+                $("#setPlayTeamModeldept2").empty();
+                addToDeptList("setPlayTeamModeldept2");
+                $('#setPlayTeamModel').modal({
+                    backdrop: "static"
+                })
+            })
+            //用于给团队赛模态框的设置按钮添加点击事件
+        $("#setPlayTeamModel_set").click(function() {
+                var beginTime = $("#setPlayTeamModel_beginTime").val();
+                var endTime = $("#setPlayTeamModel_EndTime").val();
+                var dept1 = $("#setPlayTeamModeldept1").val();
+                var dept2 = $("#setPlayTeamModeldept2").val();
+                var star = new Array();
+                var star2 = new Array();
+                star = beginTime.split("/");
+                star2 = endTime.split("/");
+                beginTimeM = star[2] + "-" + star[0] + "-" + star[1];
+                endTimeM = star2[2] + "-" + star2[0] + "-" + star2[1];
+                if (beginTime > endTime) {
+                    alert("开始时间必须小于结束时间");
+
+                } else if (dept1 == dept2) {
+                    alert("相同部门不允许进行团队赛")
+                } else {
+                    var insertteamgameInfo = "";
+                    insertteamgameInfo += beginTimeM + "_" + endTimeM + "_" + dept1 + "_" + dept2;
+
+                    $.ajax({
+                        url: host + "/hongsong/insertteamgame",
+                        data: "insertteamgameInfo=" + insertteamgameInfo,
+                        type: "get",
+                        success: function(data) {
+                            alert("团队赛添加成功")
+                        },
+                        error: function() {
+                            alert("团队赛插入失败")
+                        }
+                    });
+                }
+
+            })
+            //用于将部门信息添加到列表中
+        function addToDeptList(el) {
+            $.ajax({
+                url: host + "/hongsong/getDeptByE",
+                data: "getDeptByEInfo=" + enterpriseId,
+                type: "GET",
+                success: function(data) {
+                    //接下来就是添加部门信息到下拉列表 
+                    $.each(data.results,
+                        function(index, item) {
+                            $("#" + el).append(
+                                "<option data-deptid='" + item.deptid + "'>" + item.deptname +
+                                "</option>");
+                        });
+
+                }
+            });
+        }
+        //用于给查看团队赛添加点击事件
+        $("#lookteamGame").click(function() {
+                window.location.href = 'teamgame.html?logininfo=' + logininfo;
+            })
+            //用于查看部门
+        $("#lookdept").click(function() {
+                $.ajax({
+                    url: host + "/hongsong/getDept",
+                    data: "getDeptInfo=" + enterpriseId,
+                    type: "GET",
+                    success: function(data) {
+
+                        $("#lookDeptModel_tbody").empty();
+                        $.each(data.result, function(index, item) {
+                            $("#lookDeptModel_tbody").append("<tr id='look" + index + "'></tr>");
+                            $("#look" + index).append("<td>" + item.deptname + "<td>");
+                            $("#look" + index).append("<td id='bu" + index + "'></td>");
+                            $("#bu" + index).append("  ");
+                            $("#bu" + index).append("<button class='btn btn-danger btn-sm lookdelete' data-delete='" + item.deptid + "' data-dN='" + item.deptname + "'><span class='glyphicon glyphicon-trash ' aria-hidden='true'></span>删除</button>");
+                        })
+                        $('#lookDeptModel').modal({
+                            backdrop: "static"
+                        })
+
+                    }
+                });
+            })
+            //用于实现部门的删除按钮
+        $(document).on("click", ".lookdelete", function() {
+            var deptid = $(this).attr("data-delete");
+            var deptName = $(this).attr("data-dN")
+            $.ajax({
+                url: host + "/hongsong/deleteDept",
+                data: "deleteDeptInfo=" + deptid,
+                type: "GET",
+                success: function(data) {
+                    alert("删除成功")
+                    $('#lookDeptModel').modal("hide");
+                },
+                error: function() {
+                    alert("删除失败")
+                }
+            });
+        });
+        //用于实现部门的添加按钮
+        $(document).on("click", "#adddept", function() {
+            $("#addDeptModeldeptName").val("")
+            $('#addDeptModel').modal({
+                backdrop: "static"
+            })
+        });
+        //用于实现部门的添加按钮
+        $(document).on("click", "#adddeptName", function() {
+            var deptName = $("#addDeptModeldeptName").val();
+            var addDeptInfo = deptName + "-" + enterpriseId;
+            $.ajax({
+                url: host + "/hongsong/addDept",
+                data: "addDeptInfo=" + addDeptInfo,
+                type: "GET",
+                success: function(data) {
+                    alert("添加成功")
+                    $('#addDeptModel').modal("hide");
+                },
+                error: function() {
+                    alert("删除失败")
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
