@@ -146,9 +146,9 @@
 	</select>
 
     <select id="getAllPurchase"
-            resultType="com.boot.liqian.model.Purchase">
+            resultType="com.boot.liqian.model.Spend">
 		select * from
-		purchase
+		spend
 	</select>
 
     <select id="getPurchaseByID" parameterType="String"
@@ -228,5 +228,15 @@
 	<select id="getAllRechargeRecordsById" parameterType="String"
 			resultType="com.boot.liqian.model.Rechagerecord">
 	SELECT * FROM rechagerecord where userid=#{userid}
+	</select>
+
+	<select id="getSpendInfoByUserId" parameterType="String"
+			resultType="com.boot.liqian.model.Spend">
+	SELECT * FROM spend where userid=#{userid}
+	</select>
+
+	<select id="getSpendDetailById" parameterType="String"
+			resultType="com.boot.liqian.model.SpendDetail">
+	SELECT * FROM spenddetail where userId=#{userId}
 	</select>
 </mapper>

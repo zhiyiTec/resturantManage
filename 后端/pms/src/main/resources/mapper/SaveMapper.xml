@@ -80,4 +80,17 @@
 
 	</insert>
 
+	<insert id="addSpend"
+			parameterType="com.boot.liqian.model.Spend">
+		insert into spend (userid)
+		values(#{userid})
+
+	</insert>
+
+	<insert id="addSpenddetail"
+			parameterType="com.boot.liqian.model.SpendDetail">
+		insert into spenddetail (userId,spendtime,spendnumber)
+		values(#{userId},#{spendtime},#{spendnumber})
+
+	</insert>
 </mapper>
