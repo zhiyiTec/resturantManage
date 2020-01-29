@@ -1,0 +1,11 @@
+.pom-agile input[type="text"],
+.pom-agile input[type="password"] {
+    outline: none;
+    font-size: .9em;
+    border: none;
+    background: transparent;
+    width: auto;
+    color: #000;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 1px;
+}

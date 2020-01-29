@@ -4,10 +4,7 @@ import com.boot.liqian.mapper.DeleteMapper;
 import com.boot.liqian.mapper.GetMapper;
 import com.boot.liqian.mapper.SaveMapper;
 import com.boot.liqian.mapper.UpdateMapper;
-import com.boot.liqian.model.Medince;
-import com.boot.liqian.model.MedinceType;
-import com.boot.liqian.model.Productor;
-import com.boot.liqian.model.Purchase;
+import com.boot.liqian.model.*;
 import com.boot.liqian.service.MedinceManageService;
 import com.boot.liqian.service.PurchaseManageService;
 import com.github.pagehelper.PageHelper;
@@ -33,17 +30,12 @@ public class PurchaseManageServiceImpl implements PurchaseManageService {
 
 
     @Override
-    public List<Purchase> getAllPurchase(Integer pn) {
+    public List<Spend> getAllPurchase(Integer pn) {
         PageHelper.startPage(pn, 5);// 后面紧跟的这个查询就是分页查询
-        List<Purchase> purchases = getMapper.getAllPurchase();
-
-        for(Purchase p:purchases){
-            MedinceType medinceType=getMapper.getMedinceTypeByType(String.valueOf(p.getMedinceType()));
-            p.setMedinceTypeCotent(medinceType.getCotent());
-            Productor productor= getMapper.getProductByPI(p.getProductorId());
-            p.setProductorName(productor.getProductorName());
-           Medince medince= getMapper.getMedinceByMN(p.getMedinceId());
-           p.setMedinceName(medince.getMedinceName());
+        List<Spend> purchases = getMapper.getAllPurchase();
+        for (Spend s:purchases){
+            User user=getMapper.getUserByUserId(s.getUserid());
+            s.setName(user.getUserName());
         }
         return purchases;
     }
@@ -74,5 +66,10 @@ public class PurchaseManageServiceImpl implements PurchaseManageService {
             p.setMedinceName(medince.getMedinceName());
         }
         return purchases;
+    }
+
+    @Override
+    public List<SpendDetail> getSpendDetailById(String userId) {
+        return getMapper.getSpendDetailById(userId);
     }
 }

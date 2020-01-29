@@ -2,6 +2,8 @@ package com.boot.liqian.controller;
 
 import com.boot.liqian.model.Buyer;
 import com.boot.liqian.model.Purchase;
+import com.boot.liqian.model.Spend;
+import com.boot.liqian.model.SpendDetail;
 import com.boot.liqian.service.MedinceSaileManageService;
 import com.boot.liqian.service.PurchaseManageService;
 import com.github.pagehelper.PageInfo;
@@ -30,9 +32,21 @@ public class PurchaseManageController {
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         response.setHeader("Access-Control-Allow-Credentials", "true");// 允许服务器向浏览器跨域响应时更改浏览器（客户端）的cookie
         Map<String, Object> map = new HashMap<String, Object>();
-        List<Purchase> purchases = purchaseManageService.getAllPurchase(pn);
+        List<Spend> purchases = purchaseManageService.getAllPurchase(pn);
         PageInfo page = new PageInfo(purchases, 5);// 5:表示每次只显示5页的导航菜单
         map.put("results", page);
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getSpendDetailById", method = RequestMethod.POST)
+    public Map<String, Object> getSpendDetailById(@RequestParam("userid") String userid,
+                                                  HttpServletResponse response, HttpServletRequest request) {
+        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        response.setHeader("Access-Control-Allow-Credentials", "true");// 允许服务器向浏览器跨域响应时更改浏览器（客户端）的cookie
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<SpendDetail> spendDetails=purchaseManageService.getSpendDetailById(userid);
+        map.put("re",spendDetails);
         return map;
     }
     @ResponseBody

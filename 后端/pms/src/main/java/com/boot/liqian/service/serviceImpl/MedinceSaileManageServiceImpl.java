@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 
 import javax.swing.plaf.basic.BasicButtonUI;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -78,6 +79,22 @@ public class MedinceSaileManageServiceImpl implements MedinceSaileManageService 
         user.setUserId(id);
         user.setUserName(name);
         updateMapper.updateUserNameByBI(user);
+
+
+        Spend spend=getMapper.getSpendInfoByUserId(id);
+        Spend spend1=new Spend();
+        if(spend==null){
+            spend1.setUserid(id);
+            saveMapper.addSpend(spend1);
+        }
+        Date day=new Date();
+        SpendDetail spendDetail=new SpendDetail();
+        spendDetail.setUserid(id);
+        spendDetail.setSpendtime(day);
+        spendDetail.setSpendnumber(Double.valueOf(count));
+        if(Double.valueOf(count)!=0){
+            saveMapper.addSpenddetail(spendDetail);
+        }
     }
 
     @Override
@@ -242,6 +259,21 @@ public class MedinceSaileManageServiceImpl implements MedinceSaileManageService 
         buyer.setSunmoney(sm);
         buyer.setIntegral(inter);
         updateMapper.updateBuyerByBI(buyer);
+
+        Spend spend0=getMapper.getSpendInfoByUserId(spend.getUserid());
+        Spend spend1=new Spend();
+        if(spend0==null){
+            spend1.setUserid(spend.getUserid());
+            saveMapper.addSpend(spend1);
+        }
+        Date day=new Date();
+        SpendDetail spendDetail=new SpendDetail();
+        spendDetail.setUserid(spend.getUserid());
+        spendDetail.setSpendtime(day);
+        spendDetail.setSpendnumber(spend.getMoney());
+        if(spend.getMoney()!=0){
+            saveMapper.addSpenddetail(spendDetail);
+        }
         return re;
     }
 

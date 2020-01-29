@@ -1,0 +1,31 @@
+.margin-top-auto {
+    margin-top: auto;
+}
+
+.left {
+    padding-bottom: 45%;
+    width: 15%;
+    height: 100%;
+    background-color: lightblue;
+    float: left;
+}
+
+.right .p-l-25 {
+    padding-left: 15%;
+}
+
+@media screen and (max-width: 720px) {
+    .left {
+        padding-bottom: 100%;
+        width: auto;
+        /* height: 100%; */
+        background-color: white;
+        float: left;
+    }
+    .right .p-l-25 {
+        padding-left: 35%;
+    }
+    .right .p-l-15 {
+        padding-left: 35%;
+    }
+}

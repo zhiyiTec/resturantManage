@@ -15,4 +15,6 @@ public interface SaveMapper {
     public Integer addPrize(Redemption redemption);//添加一件奖品信息
     public Integer addRecharge(Recharge recharge);//添加充值信息
     public Integer addRechargeRecord(Rechagerecord rechagerecord);//添加充值记录
+    public Integer addSpend(Spend spend);//添加用户消费记录
+    public Integer addSpenddetail(SpendDetail spendDetail);//添加用户详细消费记录
 }

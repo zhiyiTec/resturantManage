@@ -32,7 +32,8 @@ public interface GetMapper {
     public List<Sail> getSsailByID(String medinceId);//通过药品ID模糊查询
     public List<Sail> getSailByID(String buyerId);//通过用户ID精准查询
     public Sail getSailByBuyID(String buyId);//通过BuyID精准查询
-    public List<Purchase> getAllPurchase();//获取所有进货信息
+    public List<Spend> getAllPurchase();//获取所有消费信息
+    public Spend getSpendInfoByUserId(String userid);//通过用户id获取spend表中的信息
     public List<Purchase> getPurchaseByID(String medinceId);//通过药品ID查询
     public List<Return> getALlReturnInfo();//查询所有退货信息
     public List<Return> getReturnInfoByID(String medinceId);//通过药品ID查询所模糊查询Return
@@ -44,4 +45,6 @@ public interface GetMapper {
     public Double getSumMoneyFromrechagerecordById(String userid);//获取指定id的充值总额
     public List<Recharge> getAllRecharges();//获取所有的充值信息
     public  List<Rechagerecord> getAllRechargeRecordsById(String userid);//通过指定Id获取其对应的充值记录
+    public List<SpendDetail> getSpendDetailById(String userId);//通过 用户Id获取对应的消费详情
+
 }

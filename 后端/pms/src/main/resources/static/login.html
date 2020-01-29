@@ -1,0 +1,345 @@
+<!DOCTYPE HTML>
+<html lang="zxx">
+
+<head>
+    <title>登录</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- Meta tag Keywords -->
+    <!-- css files -->
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+    <!-- css files -->
+    <link rel="stylesheet" href="css/style_pms.css" type="text/css" media="all" />
+    <!-- Style-CSS -->
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <!--下面用于引入bootStrap样式-->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!--下面用于引入loign样式-->
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+    <!-- 管理员提示模态框 -->
+    <div class="modal fade bs-example-modal-sm" id="#alert" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                您的当前身份为管理员
+            </div>
+        </div>
+    </div>
+    <!-- 输入新密码模态框 -->
+    <div class="modal fade" id="newPassModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel_Reset">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="#" id="form_Reset">
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">新密码</label>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control" id="inputNewPa" name="inputPassword" placeholder="新密码">
+                                <span class="help-block" id="helpSpanToinputnewPa"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword_Reset" class="col-sm-2 control-label ">确认密码</label>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control" id="inputNewPaCon" name="inputPassword" placeholder="确认密码">
+                                <span class="help-block" id="helpSpanToinputnewPaCon"></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="Reset">确认修改</button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- 忘记密码模态框 -->
+    <div class="modal fade" id="forgetModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                    <h4 class="modal-title" id="myModalLabel_Reset">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="#" id="form_Reset">
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">电话</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputPhone" name="inputPassword" placeholder="电话">
+                                <span class="help-block" id="helpSpanToinputPhone"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword_Reset" class="col-sm-2 control-label ">输入身份证号</label>
+                            <div class="col-sm-4">
+                                <input type="password" class="form-control" id="inputPasswordToken" name="inputPassword" placeholder="身份证号">
+                                <span class="help-block" id="helpSpanToinputPassword"></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="deal_Reset">确认</button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!--//header-->
+    <div class="main-content-agile">
+        <div class="sub-main-w3 login-admin">
+            <h2>登录界面</h2>
+            <label>电话</label>
+            <div class="pom-agile" id="name_div">
+                <span class="fa fa-user-o" aria-hidden="true"></span>
+                <input placeholder="Username" name="Name" class="user" type="text" required="" id='name' data-sig="0">
+                <span id="name_span"></span>
+            </div>
+            <label style="color:crimson">密码</label>
+
+            <div class="pom-agile " id="pas_div">
+                <span class="fa fa-key" aria-hidden="true"></span>
+                <input placeholder="" name="Password" class="pass" type="password" required="" id='pas' style="color:crimson">
+                <span id='passapn'></span>
+            </div>
+            <div class='button'>
+                <a id='forget'>忘记密码</a>
+
+            </div>
+
+
+
+            <div class="sub-w3l">
+                <div class="clear"></div>
+            </div>
+            <div class="right-w3l">
+                <input type="submit" value="登录" id="sub" data-sig='0'>
+            </div>
+
+        </div>
+    </div>
+    <!--footer-->
+    <div class="footer">
+
+    </div>
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!--引入boootBox-->
+    <script src="https://cdn.bootcss.com/bootbox.js/4.4.0/bootbox.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/bootbox.js"></script>
+    <!-- 判断输入的字符是否为空 -->
+    <script src="js/vertification.js"></script>
+    <script>
+        var code;
+        var user;
+        var pas;
+        //忘记密码
+        $("#forget").click(function() {
+                //此处弹出模态框
+                $("#inputPhone").val("");
+                $("#inputPasswordToken").val("");
+                $("#helpSpanToinputPhone").empty();
+                $("#helpSpanToinputPassword").empty();
+                $('#forgetModel').modal({
+                    backdrop: "static"
+                })
+
+            })
+            //处理密保
+        $("#deal_Reset").click(function() {
+                var userPhone = $("#inputPhone").val();
+                user = userPhone;
+                var passToken = $("#inputPasswordToken").val();
+                if (empty(userPhone)) {
+                    $("#helpSpanToinputPhone").empty();
+                    $("#helpSpanToinputPhone").append("<div class='alert alert-warning alert-dismissible alert_Name' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Warning!</strong>请输入电话</div>")
+
+                } else if (empty(passToken)) {
+                    $("#helpSpanToinputPassword").empty();
+                    $("#helpSpanToinputPassword").append("<div class='alert alert-warning alert-dismissible alert_Name' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Warning!</strong>请输入密保</div>")
+
+                } else {
+                    $.ajax({
+                        url: host + "/judgePasswordToken",
+                        data: {
+                            userId: userPhone,
+                            passwordToken: passToken
+                        },
+                        dataType: "json",
+                        type: "post",
+                        //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        crossDomain: true,
+                        success: function(data) {
+                            if (data.status == 0) {
+                                $("#helpSpanToinputPhone").empty();
+                                $("#helpSpanToinputPhone").append("<div class='alert alert-warning alert-dismissible alert_Name' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Warning!</strong>请检查输入的电话是否已经注册</div>")
+                            } else if (data.status == 1) {
+                                $('#forgetModel').modal("hide");
+                                //此处弹出模态框
+                                $("#inputNewPa").val("");
+                                $("#inputNewPaCon").val("");
+                                $("#helpSpanToinputnewPa").empty();
+                                $("#helpSpanToinputnewPaCon").empty();
+                                $('#newPassModel').modal({
+                                    backdrop: "static"
+                                })
+
+
+                            } else {
+                                $("#helpSpanToinputPassword").empty();
+                                $("#helpSpanToinputPassword").append("<div class='alert alert-warning alert-dismissible alert_Name' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Warning!</strong>密保有误</div>")
+                            }
+
+                        },
+                        error: function(data) {
+                            alert("获取token失败");
+                        }
+                    });
+                }
+
+
+            })
+            //确认新密码
+        $("#Reset").click(function() {
+                var pass = $("#inputNewPa").val();
+                var passCon = $("#inputNewPaCon").val();
+                if (empty(pass)) {
+                    $("#helpSpanToinputnewPa").empty();
+                    $("#helpSpanToinputnewPa").append("<div class='alert alert-warning alert-dismissible alert_Name' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Warning!</strong>密码不能为空</div>")
+
+                } else if (empty(passCon)) {
+                    $("#helpSpanToinputnewPaCon").empty();
+                    $("#helpSpanToinputnewPaCon").append("<div class='alert alert-warning alert-dismissible alert_Name' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Warning!</strong>密码不能为空</div>")
+
+                } else if (pass != passCon) {
+                    $("#helpSpanToinputnewPaCon").empty();
+                    $("#helpSpanToinputnewPaCon").append("<div class='alert alert-warning alert-dismissible alert_Name' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Warning!</strong>两次密码输入不一致</div>")
+                } else {
+                    $.ajax({
+                        url: host + "/modifyPassword",
+                        data: {
+                            userId: user,
+                            newPassword: pass
+                        },
+                        dataType: "json",
+                        type: "post",
+                        //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        crossDomain: true,
+                        success: function(data) {
+                            alert("修改成功")
+                            $('#newPassModel').modal("hide");
+                        },
+                        error: function(data) {
+                            alert("获取token失败");
+                        }
+                    });
+                }
+
+
+            })
+            //处理登录
+        $("#sub").click(function() {
+
+
+            pas = $("#pas").val();
+            user = $("#name").val();
+            if (empty(user)) {
+                $("#name_span").empty();
+                $("#name_span").append("<div class='alert alert-warning alert-dismissible alert_Name' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Warning!</strong>用户名违法.</div>")
+
+            } else if (empty(pas)) {
+                $("#passapn").empty();
+                $("#passapn").append("<div class='alert alert-warning alert-dismissible alert_Name' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Warning!</strong>请输入密码</div>")
+
+            } else {
+
+                var dialog = bootbox.dialog({
+                    message: '<p class="text-center mb-0"><i class="fa fa-spin fa-cog"></i>身份验证中...</p>',
+                    closeButton: false
+                });
+                dialog.init(function() {
+                    setTimeout(function() {
+                        $.ajax({
+                            url: host + "/login",
+                            data: {
+                                userId: user,
+                                password: pas
+                            },
+                            dataType: "json",
+                            type: "post",
+                            //加上这句话,允许浏览器向服务器跨域请求时携带cookie
+                            xhrFields: {
+                                withCredentials: true
+                            },
+                            crossDomain: true,
+                            success: function(data) {
+                                dialog.modal('hide');
+
+                                var userInfo = data.user;
+
+                                if (userInfo != 0) {
+                                    if (data.loginRe == 2) {
+                                        var logininfo = user;
+                                        if (userInfo.userType == 0) {
+
+                                            botx_confirm("您的当前身份为超级管理员", 'superManage.html?logininfo=' + logininfo);
+                                        } else if (userInfo.userType == 1) {
+                                            botx_confirm("您的当前身份为级管理员", 'manage.html?logininfo=' + logininfo);
+
+                                        } else {
+
+                                            window.location.href = 'buyer.html?logininfo=' + logininfo;
+                                        }
+                                    } else if (data.loginRe == 1) {
+                                        botx_alert("您还未注册会员，请联系销售员给您进行注册", "large");
+                                    } else {
+                                        $("#passapn").empty();
+                                        $("#passapn").append("<div class='alert alert-warning alert-dismissible alert_Name' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Warning!</strong>用户名或密码有误</div>")
+                                    }
+                                } else {
+                                    botx_alert("您还未注册会员，请联系销售员给您进行注册", "large");
+
+                                }
+
+
+                            },
+                            error: function(data) {
+                                botx_alert("获取token失败", "small");
+                            }
+                        });
+                    }, 2000);
+                });
+
+            }
+
+        })
+    </script>
+
+</html>
